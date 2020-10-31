@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "ly-tree": "/components/ly-tree/ly-tree",
+    "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar",
+    "uni-icon": "/components/uni-icons/uni-icons",
+    "uni-search-bar": "/components/uni-search-bar/uni-search-bar",
+    "tree": "/components/ly-tree/ly-tree"
+  }
+}

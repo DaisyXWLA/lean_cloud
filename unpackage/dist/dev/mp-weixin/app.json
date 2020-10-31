@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/personal/personal",
+    "pages/integral/integral",
+    "pages/message/message",
+    "pages/notice/notice",
+    "pages/task/task",
+    "pages/notice/notice-detail/notice-detail",
+    "pages/my-proposal/my-proposal",
+    "pages/rank/rank",
+    "pages/idea/idea",
+    "pages/add/add",
+    "pages/proposal/proposal",
+    "pages/check/check",
+    "pages/refuse/refuse",
+    "pages/finish/finish",
+    "pages/accept/accept",
+    "pages/department/department",
+    "pages/member/member",
+    "pages/task-manage/task-manage",
+    "pages/proposal-detail/proposal-detail",
+    "pages/staff-manage/staff-manage",
+    "pages/staff-add/staff-add"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "selectedColor": "#4378be",
+    "color": "#bbc0d4",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/proposal/proposal",
+        "iconPath": "static/icon/home@2x.png",
+        "selectedIconPath": "static/icon/home-selected@2x.png"
+      },
+      {
+        "text": "任务",
+        "pagePath": "pages/task/task",
+        "iconPath": "static/icon/mission@2x.png",
+        "selectedIconPath": "static/icon/mission-selected@2x.png"
+      },
+      {
+        "pagePath": "pages/add/add",
+        "iconPath": "static/icon/add@2x.png",
+        "selectedIconPath": "static/icon/add-selected@2x.png"
+      },
+      {
+        "text": "排行",
+        "pagePath": "pages/rank/rank",
+        "iconPath": "static/icon/rank@2x.png",
+        "selectedIconPath": "static/icon/rank-selected@2x.png"
+      },
+      {
+        "text": "提案",
+        "pagePath": "pages/idea/idea",
+        "iconPath": "static/icon/idea@2x.png",
+        "selectedIconPath": "static/icon/idea-selected@2x.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "ly-tree-node": "/components/ly-tree/ly-tree-node"
+  }
+}

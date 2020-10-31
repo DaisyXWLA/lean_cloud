@@ -1,0 +1,1 @@
+{"version":3,"sources":["uni-app:///main.js"],"names":["createPage","Page"],"mappings":";;;;;;;;;;kDAAA;AACA;AACA,iH;AACAA,UAAU,CAACC,oBAAD,CAAV,C","file":"pages/task-manager/task-manager.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './pages/task-manager/task-manager.vue'\ncreatePage(Page)"],"sourceRoot":""}
