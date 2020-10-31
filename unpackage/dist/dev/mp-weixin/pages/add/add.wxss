@@ -31,7 +31,6 @@
 .add-container .title text.data-v-f869476c {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .add-container .title textarea.data-v-f869476c {
   font-size: 28rpx;
@@ -56,7 +55,6 @@
   padding: 0;
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .add-container .category .picker.data-v-f869476c {
   -webkit-box-flex: 1;
@@ -76,7 +74,6 @@
   padding: 0 30rpx;
   cont-size: 32rpx;
   color: #333;
-  font-weight: bold;
   box-sizing: border-box;
 }
 .add-container .section textarea.data-v-f869476c {
@@ -94,7 +91,6 @@
 .add-container .accessory text.data-v-f869476c {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .add-container .accessory .upload-btn.data-v-f869476c {
   margin-top: 20rpx;
@@ -104,5 +100,15 @@
   width: 60rpx;
   height: 60rpx;
   padding: 30rpx;
+}
+.add-container .accessory.data-v-f869476c .imageUpload {
+  margin: 0 10rpx 10rpx 0;
+}
+.add-container .accessory.data-v-f869476c .imageItem {
+  margin: 0 10rpx 10rpx 0;
+}
+.add-container .accessory.data-v-f869476c .imageUploadContainer {
+  padding: 0;
+  margin: 20rpx 0;
 }
 

@@ -108,7 +108,7 @@
 		methods: {
 			back() {
 				uni.redirectTo({
-					url: "../proposal-detail/proposal-detail"
+					url: "../my-proposal/my-proposal"
 				})
 			},
 			checkConfirm () {
@@ -158,7 +158,6 @@
 			.check-container-radio-title {
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
 			}
 			radio-group {
 				display: flex;
@@ -187,7 +186,7 @@
 				.title-name {
 					font-size: 32rpx;
 					color: #333;
-					font-weight: bold;
+
 				}
 			}
 			.list {
@@ -212,7 +211,6 @@
 			/deep/ .uni-list-item__content-title{
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
 			}
 			/deep/ .uni-list-item__extra-text{
 				font-size: 28rpx;
@@ -227,7 +225,6 @@
 				padding:0 30rpx;
 				cont-size:32rpx;
 				color: #333;
-				font-weight: bold;
 				box-sizing: border-box;
 			}
 			textarea{

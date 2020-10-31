@@ -24,29 +24,31 @@
 						<text>编号：INTE202010131520222454</text>
 						<text>部门：技术部</text>
 						<text>提案类别：设备工艺改进</text>
+						<text>现状：现状描述</text>
+						<text>建议：期望建议</text>
 					</view>
-					<view class="section">
+					<!-- <view class="section">
 						<text class="txt">现状：</text>
 						<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
 					</view>
 					<view class="section">
 						<text class="txt">建议：</text>
 						<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
-					</view>
+					</view> -->
 					<view class="img">
 						<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
 						<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
 						<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
-						<image src="../../static/scenery-4.jpg" mode="aspectFill"></image>
+						<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
 					</view>
 				</view>
 			</view>
 			<view class="proposal-container-detail-progress">
-				<view class="proposal-container-detail-progress-title">
+				<!-- <view class="proposal-container-detail-progress-title">
 					<text>验收进度</text>
-				</view>
+				</view> -->
 				<view class="proposal-container-detail-progress-steps">
-					<uniSteps :options="options" direction="column" :active="active"  v-if="active==0&&options[0].title=='新建任务'">
+					<uniSteps :options="options" direction="column" :active="active" v-if="active==0&&options[0].title=='新建任务'">
 						<template slot="footer">
 							<text class="steps-remark">新提案请审核</text>
 							<view class="steps-info">
@@ -72,6 +74,7 @@
 				<!-- <button size="mini" class="refuse-btn" @click="refuse">拒绝</button> -->
 				<button size="mini" class="finish-btn" @click="finish">完成</button>
 				<button size="mini" class="accept-btn" @click="accept">验收</button>
+				<uni-popup ref="popup" type="bottom">底部弹出 Popup</uni-popup>
 			</view>
 			<view>
 				<button size="mini" class="transfer-btn">转移</button>
@@ -84,38 +87,51 @@
 	import uniNavBar from "../../components/uni-nav-bar/uni-nav-bar.vue"
 	import uniIcon from "../../components/uni-icons/uni-icons.vue"
 	import uniSteps from '../../components/uni-steps/uni-steps.vue'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	export default {
-		components:{uniNavBar,uniIcon,uniSteps},
+		components: {
+			uniNavBar,
+			uniIcon,
+			uniSteps,
+			uniPopup
+		},
 		data() {
 			return {
-				active:0,
-				options:[{title:'新建任务'},{title:'审核通过'},{title:'已落实'},{title:'验收通过'}]
+				active: 0,
+				options: [{
+					title: '新建任务'
+				}, {
+					title: '审核通过'
+				}, {
+					title: '已落实'
+				}, {
+					title: '验收通过'
+				}]
 			}
 		},
 		methods: {
-			back () {
+			back() {
 				uni.switchTab({
-					url:"../task/task"
+					url: "../task/task"
 				})
 			},
-			check () {
+			check() {
+				this.$refs.popup.open()
+
+			},
+			refuse() {
 				uni.redirectTo({
-					url:"../check/check"
+					url: "../refuse/refuse"
 				})
 			},
-			refuse () {
+			finish() {
 				uni.redirectTo({
-					url:"../refuse/refuse"
+					url: "../finish/finish"
 				})
 			},
-			finish () {
+			accept() {
 				uni.redirectTo({
-					url:"../finish/finish"
-				})
-			},
-			accept () {
-				uni.redirectTo({
-					url:"../accept/accept"
+					url: "../accept/accept"
 				})
 			}
 		}
@@ -123,43 +139,49 @@
 </script>
 
 <style lang="scss" scoped>
-	.proposal-container-detail{
-		.proposal-container-detail-content{
-			background:#fff;
+	.proposal-container-detail {
+		.proposal-container-detail-content {
+			background: #fff;
 			padding: 30rpx;
-			.proposal-container-detail-content-header{
+
+			.proposal-container-detail-content-header {
 				border-bottom: 1px solid #f2f2f2;
 				padding-bottom: 20rpx;
-				box-sizing: border-box;	
-				line-height:48rpx;
-				.title{
+				box-sizing: border-box;
+				line-height: 48rpx;
+
+				.title {
 					font-size: 32rpx;
-					font-weight:600;
 					color: #333;
 				}
-				.time{
-					font-size:28rpx;
-					color:#999;
+
+				.time {
+					font-size: 28rpx;
+					color: #999;
 				}
-				.approval-status{
+
+				.approval-status {
 					display: flex;
 					justify-content: space-between;
-					.user{
-						image{
+
+					.user {
+						image {
 							width: 36rpx;
 							height: 36rpx;
-							border-radius:10rpx;
+							border-radius: 10rpx;
 							border: 1px solid #fff;
 							vertical-align: middle;
 						}
-						text{
+
+						text {
 							font-size: 28rpx;
 							color: #999;
 							vertical-align: middle;
-							padding-left:10rpx;
+							padding-left: 10rpx;
 						}
 					}
-					.status{
+
+					.status {
 						font-size: 28rpx;
 						color: #35BA5B;
 						background: #DBFFE6;
@@ -168,88 +190,109 @@
 					}
 				}
 			}
-			.proposal-container-detail-content-box{
-				.info{
-					margin-top:20rpx;
-					text{
+
+			.proposal-container-detail-content-box {
+				.info {
+					margin-top: 20rpx;
+
+					text {
 						display: block;
 						font-size: 28rpx;
-						color: #333;
-						line-height:42rpx;
-						font-weight:600;
+						color: #666;
+						line-height: 42rpx;
+						// label{
+						// 	color: #999;
+						// }
 					}
 				}
-				.section{
+
+				.section {
 					font-size: 28rpx;
-					background:#f8f8f8;
-					border-radius:16rpx;
-					padding:20rpx;
-					line-height:42rpx;
-					margin:20rpx 0;
-					.txt{
-						font-weight:600;
+					background: #f8f8f8;
+					border-radius: 16rpx;
+					padding: 20rpx;
+					line-height: 42rpx;
+					margin: 20rpx 0;
+
+					.txt {
+						font-weight: 600;
 					}
-					.content{
-						color:#666;
+
+					.content {
+						color: #666;
 					}
 				}
-				.img{
+
+				.img {
 					display: flex;
 					justify-content: space-around;
-					image{
-						width: 140rpx;
-						height: 140rpx;
-						border-radius:10rpx;
+					margin-top: 20rpx;
+
+					image {
+						width: 180rpx;
+						height: 180rpx;
+						border-radius: 10rpx;
 						border: 1px solid #f2f2f2;
-					}					
+					}
 				}
 			}
 		}
-		.proposal-container-detail-progress{
+
+		.proposal-container-detail-progress {
 			background: #fff;
 			margin-top: 20rpx;
 			margin-bottom: 100rpx;
-			.proposal-container-detail-progress-title{
+
+			.proposal-container-detail-progress-title {
 				border-bottom: 1px solid #f2f2f2;
-				text{
+
+				text {
 					display: inline-block;
 					padding: 20rpx 30rpx;
 					font-size: 32rpx;
 					font-weight: 600;
 					color: #999999;
 				}
-				
+
 			}
-			.proposal-container-detail-progress-steps{
+
+			.proposal-container-detail-progress-steps {
 				padding: 20rpx 30rpx;
-				/deep/ .uni-steps__column-text{
+
+				/deep/ .uni-steps__column-text {
 					border: none;
 				}
-				.steps-remark{
+
+				.steps-remark {
 					font-size: 28rpx;
 					color: #666;
 					line-height: 56rpx;
 				}
-				.steps-info{
+
+				.steps-info {
 					display: flex;
-					.steps-info-portrait{
+
+					.steps-info-portrait {
 						margin-right: 10rpx;
-						image{
+
+						image {
 							width: 60rpx;
 							height: 60rpx;
 							border: 1px solid #f2f2f2;
 							border-radius: 10rpx;
 						}
 					}
-					.steps-info-user{
-						text{
+
+					.steps-info-user {
+						text {
 							display: block;
 							font-size: 24rpx;
 							color: #666;
 						}
 					}
 				}
-				.wait-time{
+
+				.wait-time {
 					font-size: 24rpx;
 					color: #FDB205;
 					background-color: #FFF1D1;
@@ -260,8 +303,9 @@
 			}
 		}
 	}
-	.footer{
-		padding:10rpx 30rpx;
+
+	.footer {
+		padding: 10rpx 30rpx;
 		box-sizing: border-box;
 		width: 100%;
 		height: 100rpx;
@@ -269,26 +313,32 @@
 		background: #fff;
 		position: fixed;
 		bottom: 0;
-		border-top: 1px solid rgba(0,0,0,0.1);
-		display:flex;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		display: flex;
 		justify-content: space-between;
-		button{
+
+		button {
 			color: #fff;
 		}
-		.check-btn{
+
+		.check-btn {
 			background: #FDB205;
 			margin-right: 20rpx;
 		}
-		.refuse-btn{
+
+		.refuse-btn {
 			background: #FE6E69;
 		}
-		.transfer-btn{
+
+		.transfer-btn {
 			background: #a55eea;
 		}
-		.finish-btn{
+
+		.finish-btn {
 			background: #2DB755;
 		}
-		.accept-btn{
+
+		.accept-btn {
 			background: #539CF8;
 		}
 	}

@@ -108,7 +108,6 @@
 			text{
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
 			}
 			textarea{
 				font-size: 28rpx;
@@ -127,7 +126,6 @@
 				padding: 0;
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
 			}
 			.picker{
 				flex: 1;
@@ -145,7 +143,6 @@
 				padding:0 30rpx;
 				cont-size:32rpx;
 				color: #333;
-				font-weight: bold;
 				box-sizing: border-box;
 			}
 			textarea{
@@ -163,7 +160,6 @@
 			text{
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
 			}
 			.upload-btn{
 				margin-top: 20rpx;
@@ -174,6 +170,16 @@
 					padding: 30rpx;
 				}
 			}	
+			/deep/ .imageUpload{
+				margin: 0 10rpx 10rpx 0;
+			}
+			/deep/ .imageItem{
+				margin: 0 10rpx 10rpx 0;
+			}
+			/deep/ .imageUploadContainer{
+				padding: 0;
+				margin: 20rpx 0;
+			}
 		}
 	}
 </style>

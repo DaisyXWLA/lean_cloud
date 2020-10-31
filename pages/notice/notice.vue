@@ -61,7 +61,7 @@
 				padding:30rpx;
 				.title{
 					font-size:32rpx;
-					font-weight:600;
+					color: #333;
 					padding-bottom:20rpx;
 				}
 				.content{

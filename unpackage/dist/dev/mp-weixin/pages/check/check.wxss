@@ -34,7 +34,6 @@
 .check-container .check-container-radio .check-container-radio-title.data-v-057b20d8 {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .check-container .check-container-radio radio-group.data-v-057b20d8 {
   display: -webkit-box;
@@ -72,7 +71,6 @@
 .check-container .check-container-select .title .title-name.data-v-057b20d8 {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .check-container .check-container-select .list.data-v-057b20d8 {
   padding: 20rpx 0;
@@ -95,7 +93,6 @@
 .check-container .check-container-time.data-v-057b20d8 .uni-list-item__content-title {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .check-container .check-container-time.data-v-057b20d8 .uni-list-item__extra-text {
   font-size: 28rpx;
@@ -110,7 +107,6 @@
   padding: 0 30rpx;
   cont-size: 32rpx;
   color: #333;
-  font-weight: bold;
   box-sizing: border-box;
 }
 .check-container .check-container-remark textarea.data-v-057b20d8 {

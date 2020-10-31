@@ -104,7 +104,6 @@
 		/deep/ .uni-list-item__content-title{
 			font-size: 32rpx;
 			color: #333;
-			font-weight: bold;
 		}
 		/deep/ .uni-list-item__extra-text{
 			font-size: 36rpx;

@@ -33,7 +33,7 @@
 		methods: {
 			back () {
 				uni.redirectTo({
-					url: "../proposal-detail/proposal-detail"
+					url: "../my-proposal/my-proposal"
 				})
 			},
 			acceptConfirm () {}
@@ -52,7 +52,6 @@
 				flex: 1;
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
 			}
 			input{
 				flex: 2;
@@ -69,7 +68,6 @@
 			text{
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
 			}
 			textarea{
 				font-size: 28rpx;

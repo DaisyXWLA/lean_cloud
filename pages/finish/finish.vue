@@ -41,7 +41,7 @@
 		methods: {
 			back () {
 				uni.redirectTo({
-					url: "../proposal-detail/proposal-detail"
+					url: "../my-proposal/my-proposal"
 				})
 			},
 			finishConfirm () {},
@@ -67,7 +67,7 @@
 				flex: 1;
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
+				
 			}
 			input{
 				flex: 2;
@@ -84,7 +84,7 @@
 			text{
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
+				
 			}
 			textarea{
 				font-size: 28rpx;
@@ -99,7 +99,7 @@
 			text{
 				font-size: 32rpx;
 				color: #333;
-				font-weight: bold;
+				
 			}
 			.upload-btn{
 				margin-top: 20rpx;
@@ -109,7 +109,17 @@
 					height: 60rpx;
 					padding: 30rpx;
 				}
-			}	
+			}
+			/deep/ .imageUpload{
+				margin: 0 10rpx 10rpx 0;
+			}
+			/deep/ .imageItem{
+				margin: 0 10rpx 10rpx 0;
+			}
+			/deep/ .imageUploadContainer{
+				padding: 0;
+				margin: 20rpx 0;
+			}
 		}
 	}
 </style>

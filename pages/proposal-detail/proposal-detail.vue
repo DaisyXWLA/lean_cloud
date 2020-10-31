@@ -24,27 +24,29 @@
 						<text>编号：INTE202010131520222454</text>
 						<text>部门：技术部</text>
 						<text>提案类别：设备工艺改进</text>
+						<text>现状：现状描述</text>
+						<text>建议：期望建议</text>
 					</view>
-					<view class="section">
+					<!-- <view class="section">
 						<text class="txt">现状：</text>
 						<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
 					</view>
 					<view class="section">
 						<text class="txt">建议：</text>
 						<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
-					</view>
+					</view> -->
 					<view class="img">
 						<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
 						<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
 						<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
-						<image src="../../static/scenery-4.jpg" mode="aspectFill"></image>
+						<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
 					</view>
 				</view>
 			</view>
 			<view class="proposal-container-detail-progress">
-				<view class="proposal-container-detail-progress-title">
+				<!-- <view class="proposal-container-detail-progress-title">
 					<text>验收进度</text>
-				</view>
+				</view> -->
 				<view class="proposal-container-detail-progress-steps">
 					<uniSteps :options="options" direction="column" :active="active" v-if="active==0&&options[0].title=='新建任务'">
 						<template slot="footer">
@@ -177,7 +179,6 @@
 
 				.title {
 					font-size: 32rpx;
-					font-weight: 600;
 					color: #333;
 				}
 
@@ -220,13 +221,11 @@
 			.proposal-container-detail-content-box {
 				.info {
 					margin-top: 20rpx;
-
 					text {
 						display: block;
 						font-size: 28rpx;
 						color: #333;
 						line-height: 42rpx;
-						font-weight: 600;
 					}
 				}
 
@@ -250,10 +249,10 @@
 				.img {
 					display: flex;
 					justify-content: space-around;
-
+					margin-top: 20rpx;
 					image {
-						width: 140rpx;
-						height: 140rpx;
+						width: 180rpx;
+						height: 180rpx;
 						border-radius: 10rpx;
 						border: 1px solid #f2f2f2;
 					}
@@ -332,12 +331,10 @@
 			margin-bottom: 100rpx;
 			.proposal-container-detail-comment-title {
 				border-bottom: 1px solid #f2f2f2;
-
 				text {
 					display: inline-block;
 					padding: 20rpx 30rpx;
-					font-size: 32rpx;
-					font-weight: 600;
+					font-size: 28rpx;
 					color: #999999;
 				}
 			}

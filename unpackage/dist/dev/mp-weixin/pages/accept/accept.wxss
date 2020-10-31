@@ -38,7 +38,6 @@
           flex: 1;
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .accept-container .earnings input.data-v-737db4c6 {
   -webkit-box-flex: 2;
@@ -57,7 +56,6 @@
 .accept-container .description text.data-v-737db4c6 {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .accept-container .description textarea.data-v-737db4c6 {
   font-size: 28rpx;

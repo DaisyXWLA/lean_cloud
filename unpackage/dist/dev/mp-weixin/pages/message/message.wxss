@@ -52,7 +52,7 @@
 }
 .message-list .message-list-container .message-list-container-content .title.data-v-a91f51d4 {
   font-size: 32rpx;
-  font-weight: 600;
+  color: #333;
 }
 .message-list .message-list-container .message-list-container-content .content.data-v-a91f51d4 {
   font-size: 28rpx;

@@ -38,7 +38,6 @@
           flex: 1;
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .finish-container .earnings input.data-v-9dcd3b34 {
   -webkit-box-flex: 2;
@@ -57,7 +56,6 @@
 .finish-container .description text.data-v-9dcd3b34 {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .finish-container .description textarea.data-v-9dcd3b34 {
   font-size: 28rpx;
@@ -72,7 +70,6 @@
 .finish-container .accessory text.data-v-9dcd3b34 {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 .finish-container .accessory .upload-btn.data-v-9dcd3b34 {
   margin-top: 20rpx;
@@ -82,5 +79,15 @@
   width: 60rpx;
   height: 60rpx;
   padding: 30rpx;
+}
+.finish-container .accessory.data-v-9dcd3b34 .imageUpload {
+  margin: 0 10rpx 10rpx 0;
+}
+.finish-container .accessory.data-v-9dcd3b34 .imageItem {
+  margin: 0 10rpx 10rpx 0;
+}
+.finish-container .accessory.data-v-9dcd3b34 .imageUploadContainer {
+  padding: 0;
+  margin: 20rpx 0;
 }
 

@@ -91,7 +91,7 @@
 				line-height:50rpx;
 				.title{
 					font-size:32rpx;
-					font-weight:600;
+					color: #333;
 				}
 				.content{
 					font-size:28rpx;

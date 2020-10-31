@@ -21,12 +21,12 @@
 				"port": 8001,
 				"disableHostCheck": true,
 				"proxy": {
-					"/api": {
+					"/index": {
 						"target": "http://192.168.3.100",
 						"changeOrigin": true,
 						"secure": false,
 						"pathRewrite": {
-							"^/api": "/api"
+							"^/index": ""
 						}
 					}
 				}

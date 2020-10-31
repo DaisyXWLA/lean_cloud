@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<!-- 导航 -->
-		<uniNavBar :status-bar="true" background-color="#4378BE" color="#ffffff" title="安腾云" fixed @clickLeft="clickLeft" @clickRight="clickRight">
+		<uniNavBar :status-bar="true" background-color="#4378BE" color="#ffffff" title="安腾云" fixed @clickLeft="clickLeft"
+		 @clickRight="clickRight">
 			<template slot="left">
 				<image class="user" src="../../static/icon/user.png" mode="widthFix"></image>
 			</template>
@@ -12,60 +13,63 @@
 		<!-- 抽屉 -->
 		<uniDrawer mode="left" ref="drawer">
 			<view style="padding:30rpx;" class="drawer-container">
-			   <view class="portrait">
+				<view class="portrait">
 					<image src="../../static/portrait-a.png" lazy-load="true" mode="aspectFit"></image>
-			   </view>
-			   <view class="list">
-			   	<uniList>
-			   	    <uniListItem title="个人资料" clickable to="/pages/personal/personal">
-						<template slot="header">
-						  <image class="slot-image" src="../../static/icon/personal.png" mode="widthFix"></image>
-						</template>
-					</uniListItem>
-			   	</uniList>
-				<uniList>
-				    <uniListItem title="我的积分" clickable to="/pages/personal/personal">
-						<template slot="header">
-						  <image class="slot-image" src="../../static/icon/integral.png" mode="widthFix"></image>
-						</template>
-					</uniListItem>
-				</uniList>
-				<uniList>
-				    <uniListItem title="修改密码" clickable to="/pages/personal/personal">
-						<template slot="header">
-						  <image class="slot-image" src="../../static/icon/password.png" mode="widthFix"></image>
-						</template>
-					</uniListItem>
-				</uniList>
-				<uniList>
-				    <uniListItem title="意见反馈" clickable to="/pages/personal/personal">
-						<template slot="header">
-						  <image class="slot-image" src="../../static/icon/opinion.png" mode="widthFix"></image>
-						</template>
-					</uniListItem>
-				</uniList>
-				<uniList>
-				    <uniListItem title="员工管理" clickable to="/pages/staff-manage/staff-manage">
-						<template slot="header">
-						  <image class="slot-image" src="../../static/icon/staff.png" mode="widthFix"></image>
-						</template>
-					</uniListItem>
-				</uniList>
-			   </view>
-			   <button type="warn" size="mini" class="btn" @click="exit">退出</button>
+				</view>
+				<view class="list">
+					<uniList>
+						<uniListItem title="个人资料" clickable to="/pages/personal/personal">
+							<template slot="header">
+								<image class="slot-image" src="../../static/icon/personal.png" mode="widthFix"></image>
+							</template>
+						</uniListItem>
+					</uniList>
+					<uniList>
+						<uniListItem title="我的积分" clickable to="/pages/personal/personal">
+							<template slot="header">
+								<image class="slot-image" src="../../static/icon/integral.png" mode="widthFix"></image>
+							</template>
+						</uniListItem>
+					</uniList>
+					<uniList>
+						<uniListItem title="修改密码" clickable to="/pages/personal/personal">
+							<template slot="header">
+								<image class="slot-image" src="../../static/icon/password.png" mode="widthFix"></image>
+							</template>
+						</uniListItem>
+					</uniList>
+					<uniList>
+						<uniListItem title="意见反馈" clickable to="/pages/personal/personal">
+							<template slot="header">
+								<image class="slot-image" src="../../static/icon/opinion.png" mode="widthFix"></image>
+							</template>
+						</uniListItem>
+					</uniList>
+					<uniList>
+						<uniListItem title="员工管理" clickable to="/pages/staff-manage/staff-manage">
+							<template slot="header">
+								<image class="slot-image" src="../../static/icon/staff.png" mode="widthFix"></image>
+							</template>
+						</uniListItem>
+					</uniList>
+				</view>
+				<button type="warn" size="mini" class="btn" @click="exit">退出</button>
 			</view>
 		</uniDrawer>
 		<!-- 首页内容 -->
 		<view class="container">
 			<view class="container-message">
 				<uniList>
-					<uniListChat title="消息提醒" note="您有一条未读消息" badgeText="dot" badgePositon="left" avatar="../../static/icon/message@2x.png" time="10月23日" to="/pages/message/message"></uniListChat>
+					<uniListChat title="消息提醒" note="您有一条未读消息" badgeText="dot" badgePositon="left" avatar="../../static/icon/message@2x.png"
+					 time="10月23日" to="/pages/message/message"></uniListChat>
 				</uniList>
 				<uniList>
-					<uniListChat title="企业公告" note="暂无新公告" badgeText="dot" badgePositon="left" avatar="../../static/icon/notice@2x.png" time="10月23日" to="/pages/notice/notice"></uniListChat>
+					<uniListChat title="企业公告" note="暂无新公告" badgeText="dot" badgePositon="left" avatar="../../static/icon/notice@2x.png"
+					 time="10月23日" to="/pages/notice/notice"></uniListChat>
 				</uniList>
 				<uniList>
-					<uniListChat title="任务提醒" note="您有一条未读消息" badgeText="dot" badgePositon="left" avatar="../../static/icon/task@2x.png" time="10月23日" to="/pages/task-manage/task-manage"></uniListChat>
+					<uniListChat title="任务提醒" note="您有一条未读消息" badgeText="dot" badgePositon="left" avatar="../../static/icon/task@2x.png"
+					 time="10月23日" to="/pages/task-manage/task-manage"></uniListChat>
 				</uniList>
 			</view>
 			<view class="contianer-workspace">
@@ -116,7 +120,7 @@
 						</uni-grid-item>
 					</uni-grid>
 				</view>
-				
+
 			</view>
 		</view>
 	</view>
@@ -136,40 +140,49 @@
 	import uniGrid from "../../components/uni-grid/uni-grid.vue"
 	import uniGridItem from "../../components/uni-grid-item/uni-grid-item.vue"
 	export default {
-		components:{uniNavBar,uniDrawer,uniList,uniListItem,uniListChat,uniListBadge,uniGrid,uniGridItem},
+		components: {
+			uniNavBar,
+			uniDrawer,
+			uniList,
+			uniListItem,
+			uniListChat,
+			uniListBadge,
+			uniGrid,
+			uniGridItem
+		},
 		data() {
 			return {
-			
+
 			}
 		},
 		onLoad() {
 			uni.request({
-			    url: this.apiServer + '/index/getIndexMenu',
-			    dataType: 'json', //默认 json格式
-			    method: 'get', //请求方式
-			    success: (res) => {
-			        console.log(res)
+				url: this.apiServer + '/index/getIndexMenu',
+				dataType: 'json', //默认 json格式
+				method: 'get', //请求方式
+				success: (res) => {
+					console.log(res)
 					console.log('---------------------------')
-			    },
-			    fail: (error) => {
-			        console.log(error)
-			    }
+				},
+				fail: (error) => {
+					console.log(error)
+				}
 			})
 		},
 		methods: {
-			clickLeft(){
+			clickLeft() {
 				this.$refs.drawer.open()
 			},
-			clickRight(){
+			clickRight() {
 				console.log('点击了右侧按钮')
 			},
-			exit(){
+			exit() {
 				this.$refs.drawer.close()
 			},
-			goto(obj){
-				if(obj.detail.index == 0){
+			goto(obj) {
+				if (obj.detail.index == 0) {
 					uni.switchTab({
-						url:"../proposal/proposal"
+						url: "../proposal/proposal"
 					})
 				}
 			}
@@ -178,95 +191,122 @@
 </script>
 
 <style lang="scss" scoped>
-	uni-page-wrapper{
-		background-color: #f2f2f2!important;
+	uni-page-wrapper {
+		background-color: #f2f2f2 !important;
 	}
-	.user{
+
+	.user {
 		width: 44rpx;
 	}
-	.plus{
+
+	.plus {
 		width: 44rpx;
 	}
-	.drawer-container{
+
+	.drawer-container {
 		margin-top: 88rpx;
 		display: flex;
 		flex-direction: column;
-		.portrait{
+
+		.portrait {
 			align-self: center;
 			width: 140rpx;
 			height: 140rpx;
 			border: 1px solid #BBC0D4;
 			border-radius: 50%;
 			padding: 2rpx;
-			image{
+
+			image {
 				width: 100%;
 				height: 100%;
 			}
 		}
-		.list{
+
+		.list {
 			margin-top: 60rpx;
-			.slot-image{
+
+			.slot-image {
 				width: 36rpx;
-				margin-right:20rpx;
+				margin-right: 20rpx;
 			}
-			/deep/ .uni-list--border-top{
+
+			/deep/ .uni-list--border-top {
 				height: 0;
 			}
+
+			/deep/ .uni-list-item__content-title {
+				color: #666;
+			}
 		}
-		.btn{
+
+		.btn {
 			width: 100%;
 			height: 80rpx;
 			line-height: 80rpx;
 			margin-top: 60rpx;
 		}
 	}
-	.container{
-		.container-message{
-			/deep/ .uni-list--border-bottom{
+
+	.container {
+		.container-message {
+			/deep/ .uni-list--border-bottom {
 				height: 0;
 			}
-			/deep/ .uni-list-chat__header{
+
+			/deep/ .uni-list-chat__header {
 				width: 80rpx;
 				height: 80rpx;
 				border: none;
 			}
-			/deep/ .uni-list-chat__content-title{
+
+			/deep/ .uni-list-chat__content-title {
 				font-size: 28rpx;
 			}
+
+			/deep/ .uni-badge--dot {
+				left: calc(90rpx + 30rpx - 20rpx/ 2 + 2rpx + -10rpx);
+			}
 		}
-		.contianer-workspace{
+
+		.contianer-workspace {
 			background-color: #FFFFFF;
 			margin-top: 20rpx;
-			.title{
-				padding: 15px;
-				font-size: 32rpx;
-				font-weight: 600;
+
+			.title {
+				padding: 20rpx 30rpx;
+				font-size: 28rpx;
 				color: #999999;
 			}
-			.grid{
-				.pic{
+
+			.grid {
+				.pic {
 					width: 80rpx;
 					height: 80rpx;
 				}
-				.text{
+
+				.text {
 					font-size: 26rpx;
 					padding-top: 20rpx;
+					color: #333;
 				}
-				/deep/ .uni-grid-item{
+
+				/deep/ .uni-grid-item {
 					padding: 15px 20px;
 					box-sizing: border-box;
 					border-top: 1px solid #f2f2f2;
-					
+
 				}
-				.border{
+
+				.border {
 					border-left: 1px solid #f2f2f2;
 					border-right: 1px solid #f2f2f2;
 				}
-				/deep/ .uni-grid-item__box{
+
+				/deep/ .uni-grid-item__box {
 					align-items: center;
 				}
 			}
-			
+
 		}
 	}
 </style>

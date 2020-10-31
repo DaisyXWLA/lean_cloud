@@ -14,7 +14,7 @@
 				</view>
 				<view class="content">
 					<view v-if="current === 0">
-						<view class="proposal-container">
+						<view class="proposal-container" @click="detail">
 							<view class="proposal-container-header">
 								<view class="portrait">
 									<image src="../../static/portrait.png" mode="aspectFit"></image>
@@ -29,26 +29,28 @@
 								<view class="status">待审核</view>
 							</view>
 							<view class="proposal-container-content">
-								<view class="section">
-									<text class="txt">现状：</text>
-									<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
-								</view>
-								<view class="section">
-									<text class="txt">建议：</text>
-									<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+								<view class="proposal-container-content-box">
+									<view class="section">
+										<text class="txt">现状：</text>
+										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+									</view>
+									<view class="section">
+										<text class="txt">建议：</text>
+										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+									</view>
 								</view>
 								<view class="img">
 									<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
 									<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
 									<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
-									<image src="../../static/scenery-4.jpg" mode="aspectFill"></image>
+									<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
 								</view>
 							</view>
 						</view>
 
 					</view>
 					<view v-if="current === 1">
-						<view class="proposal-container">
+						<view class="proposal-container" @click="detail">
 							<view class="proposal-container-header">
 								<view class="portrait">
 									<image src="../../static/portrait.png" mode="aspectFit"></image>
@@ -63,19 +65,21 @@
 								<view class="status">待审核</view>
 							</view>
 							<view class="proposal-container-content">
-								<view class="section">
-									<text class="txt">现状：</text>
-									<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
-								</view>
-								<view class="section">
-									<text class="txt">建议：</text>
-									<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+								<view class="proposal-container-content-box">
+									<view class="section">
+										<text class="txt">现状：</text>
+										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+									</view>
+									<view class="section">
+										<text class="txt">建议：</text>
+										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+									</view>
 								</view>
 								<view class="img">
 									<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
 									<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
 									<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
-									<image src="../../static/scenery-4.jpg" mode="aspectFill"></image>
+									<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
 								</view>
 							</view>
 						</view>
@@ -110,6 +114,11 @@
 					url:"../index/index"
 				})
 			},
+			detail(){
+				uni.redirectTo({
+					url:"../my-proposal/my-proposal"
+				})
+			},
 			clickItem(e) {
 				if (this.current !== e.currentIndex) {
 					this.current = e.currentIndex;
@@ -135,7 +144,6 @@
 
 					/deep/ .segmented-control__text {
 						font-size: 28rpx;
-						font-weight: bold;
 					}
 				}
 			}
@@ -197,26 +205,27 @@
 
 					.proposal-container-content {
 						padding: 10rpx 0;
-
-						.section {
-							background: #f8f8f8;
+						.proposal-container-content-box {
+							// background: #f8f8f8;
 							border-radius: 10rpx;
 							padding: 8rpx 20rpx;
+							margin-bottom: 20rpx;
+						}
+						.section {
 							display: -webkit-box;
 							-webkit-box-orient: vertical;
 							-webkit-line-clamp: 2;
 							overflow: hidden;
-							margin-bottom: 10rpx;
+							// margin-bottom: 10rpx;
 							line-height: 42rpx;
 
 							.txt {
 								color: #333;
 								font-size: 28rpx;
-								font-weight: bold;
 							}
 
 							.content {
-								color: #666;
+								color: #888;
 								font-size: 28rpx;
 							}
 						}
@@ -224,10 +233,10 @@
 						.img {
 							display: flex;
 							justify-content: space-around;
-
+							margin-top: 20rpx;
 							image {
-								width: 140rpx;
-								height: 140rpx;
+								width: 180rpx;
+								height: 180rpx;
 								border-radius: 10rpx;
 								border: 1px solid #f2f2f2;
 							}

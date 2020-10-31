@@ -34,7 +34,7 @@
 }
 .notice-detail-container .notice-detail-container-header .title.data-v-d4ffc802 {
   font-size: 32rpx;
-  font-weight: 600;
+  color: #333;
 }
 .notice-detail-container .notice-detail-container-header .time.data-v-d4ffc802 {
   font-size: 28rpx;
@@ -48,6 +48,6 @@
   padding: 30rpx;
   font-size: 28rpx;
   line-height: 42rpx;
-  color: #333;
+  color: #666;
 }
 

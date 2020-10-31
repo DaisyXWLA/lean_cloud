@@ -61,7 +61,7 @@
 			border-bottom:1px solid #f2f2f2;
 			.title{
 				font-size: 32rpx;
-				font-weight:600;
+				color: #333;
 			}
 			.time{
 				font-size:28rpx;
@@ -76,7 +76,7 @@
 			padding:30rpx;
 			font-size:28rpx;
 			line-height:42rpx;
-			color:#333;
+			color:#666;
 		}
 	}
 </style>

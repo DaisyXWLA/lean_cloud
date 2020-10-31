@@ -36,7 +36,6 @@
 }
 .proposal-container-detail .proposal-container-detail-content .proposal-container-detail-content-header .title.data-v-f4ab6dc0 {
   font-size: 32rpx;
-  font-weight: 600;
   color: #333;
 }
 .proposal-container-detail .proposal-container-detail-content .proposal-container-detail-content-header .time.data-v-f4ab6dc0 {
@@ -79,7 +78,6 @@
   font-size: 28rpx;
   color: #333;
   line-height: 42rpx;
-  font-weight: 600;
 }
 .proposal-container-detail .proposal-container-detail-content .proposal-container-detail-content-box .section.data-v-f4ab6dc0 {
   font-size: 28rpx;
@@ -101,10 +99,11 @@
   display: flex;
   -webkit-justify-content: space-around;
           justify-content: space-around;
+  margin-top: 20rpx;
 }
 .proposal-container-detail .proposal-container-detail-content .proposal-container-detail-content-box .img image.data-v-f4ab6dc0 {
-  width: 140rpx;
-  height: 140rpx;
+  width: 180rpx;
+  height: 180rpx;
   border-radius: 10rpx;
   border: 1px solid #f2f2f2;
 }
@@ -171,8 +170,7 @@
 .proposal-container-detail .proposal-container-detail-comment .proposal-container-detail-comment-title text.data-v-f4ab6dc0 {
   display: inline-block;
   padding: 20rpx 30rpx;
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 28rpx;
   color: #999999;
 }
 .proposal-container-detail .proposal-container-detail-comment .proposal-container-detail-comment-list.data-v-f4ab6dc0 {

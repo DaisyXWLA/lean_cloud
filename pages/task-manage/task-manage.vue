@@ -87,7 +87,6 @@
 					padding:10rpx 30rpx 20rpx;
 					.title{
 						font-size:32rpx;
-						font-weight:600;
 						padding-bottom:10rpx;
 					}
 					.proposer{
@@ -108,9 +107,9 @@
 				padding:20rpx 30rpx;
 				font-size:28rpx;
 				.section{
-					background:#f8f8f8;
+					// background:#f8f8f8;
 					border-radius:10rpx;
-					padding:8rpx 20rpx;
+					// padding:8rpx 20rpx;
 					display: -webkit-box;
 					-webkit-box-orient: vertical;
 					-webkit-line-clamp: 2;

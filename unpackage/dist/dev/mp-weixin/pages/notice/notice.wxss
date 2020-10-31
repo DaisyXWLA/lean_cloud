@@ -38,7 +38,7 @@
 }
 .notice-list .notice-list-container .notice-list-container-content .title.data-v-0b680ac6 {
   font-size: 32rpx;
-  font-weight: 600;
+  color: #333;
   padding-bottom: 20rpx;
 }
 .notice-list .notice-list-container .notice-list-container-content .content.data-v-0b680ac6 {
