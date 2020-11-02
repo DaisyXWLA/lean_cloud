@@ -10,9 +10,13 @@
 		<view class="staff-search">
 			<uniSearchBar placeholder="请输入部门名称" radius="20" bgColor="#fff" @confirm="search"></uniSearchBar>
 		</view>
-		<view class="staff-list">
-			<ly-tree :tree-data="treeData" :ready="ready" node-key="id" @node-click="handleNodeClick">
-			</ly-tree>
+		<view class="department-list">
+			<uniList>
+				<uniListItem title="技术部" showArrow clickable @click="selectDepartment"></uniListItem>
+			</uniList>
+			<uniList>
+				<uniListItem title="财务部" showArrow clickable @click="selectDepartment"></uniListItem>
+			</uniList>
 		</view>
 	</view>
 </template>
@@ -21,47 +25,21 @@
 	import uniNavBar from "../../components/uni-nav-bar/uni-nav-bar.vue"
 	import uniIcon from "../../components/uni-icons/uni-icons.vue"
 	import uniSearchBar from '../../components/uni-search-bar/uni-search-bar.vue'
-	import tree from '../../components/ly-tree/ly-tree.vue'
+	import uniList from "../../components/uni-list/uni-list.vue"
+	import uniListItem from '../../components/uni-list-item/uni-list-item.vue'
 	export default {
 		components: {
 			uniNavBar,
 			uniIcon,
 			uniSearchBar,
-			tree
+			uniList,
+			uniListItem
 		},
 		data() {
-			return {
-				ready: false, // 这里用于自主控制loading加载状态，避免异步正在加载数据的空档显示“暂无数据”
-				treeData: [],
-			}
+			return {}
 		},
 		onLoad() {
-			// 模拟异步请求
-			setTimeout(() => {
-				this.treeData = [{
-					id: 1,
-					label: '技术部',
-					children: [{
-						id: 11,
-						label: 'Andy',
-					}]
-				}, {
-					id: 2,
-					label: '企划部',
-					children: [{
-						id: 21,
-						label: 'Julie',
-					}]
-				}, {
-					id: 3,
-					label: '财务部',
-					children: [{
-						id: 31,
-						label: 'Maria',
-					}]
-				}];
-				this.ready = true;
-			}, 2000);
+
 		},
 		methods: {
 			back() {
@@ -69,15 +47,14 @@
 					url: "../index/index"
 				})
 			},
-			add(){
+			add() {
 				uni.redirectTo({
-					url:"../staff-add/staff-add"
+					url: "../staff-add/staff-add"
 				})
 			},
 			search() {
 				console.log('点击了搜索')
 			},
-			handleNodeClick() {}
 		}
 	}
 </script>
@@ -98,17 +75,11 @@
 			color: #fff;
 		}
 	}
-
-	.staff-list {
+	.department-list {
 		margin-top: 20rpx;
 
-		/deep/ .ly-tree {
-			padding: 0 30rpx;
-			/deep/ .ly-tree-node__content {
-				border-bottom: 1px solid #f2f2f2;
-				padding: 10rpx 0;
-			}
+		/deep/ .uni-list--border-top {
+			height: 0;
 		}
-
 	}
 </style>

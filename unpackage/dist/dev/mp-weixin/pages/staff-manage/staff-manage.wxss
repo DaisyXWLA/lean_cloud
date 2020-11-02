@@ -36,14 +36,10 @@
 .staff-search.data-v-7243b146 .uni-searchbar__cancel {
   color: #fff;
 }
-.staff-list.data-v-7243b146 {
+.department-list.data-v-7243b146 {
   margin-top: 20rpx;
 }
-.staff-list.data-v-7243b146 .ly-tree {
-  padding: 0 30rpx;
-}
-.staff-list.data-v-7243b146 .ly-tree /deep/ .ly-tree-node__content {
-  border-bottom: 1px solid #f2f2f2;
-  padding: 10rpx 0;
+.department-list.data-v-7243b146 .uni-list--border-top {
+  height: 0;
 }
 

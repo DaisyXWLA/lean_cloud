@@ -10,7 +10,6 @@
 			<view class="task-container-content">
 				<view class="tab">
 					<uniSegmentedControl :current="current" :values="items" @clickItem="clickItem" style-type="text" active-color="#4378BE"></uniSegmentedControl>
-
 				</view>
 				<view class="content">
 					<view v-if="current === 0">
@@ -111,12 +110,12 @@
 		methods: {
 			back() {
 				uni.redirectTo({
-					url:"../index/index"
+					url: "../index/index"
 				})
 			},
-			detail(){
+			detail() {
 				uni.redirectTo({
-					url:"../my-proposal/my-proposal"
+					url: "../my-proposal/my-proposal"
 				})
 			},
 			clickItem(e) {
@@ -129,13 +128,27 @@
 </script>
 
 <style lang="scss" scoped>
+	// #ifdef  MP-WEIXIN
+	.tab {
+		top: 150rpx;
+		/deep/ .segmented-control__text {
+			font-size: 32rpx;
+		}
+	}
+	// #endif
+	// #ifdef  H5
+	.tab {
+		top: 88rpx;
+	}
+
+	// #endif
 	.task-container {
 		.task-container-content {
 			.tab {
 				background: #fff;
 				border-bottom: 1px solid #f2f2f2;
 				position: fixed;
-				top: 88rpx;
+				// top: 88rpx;
 				width: 100%;
 				z-index: 9999;
 
@@ -205,12 +218,14 @@
 
 					.proposal-container-content {
 						padding: 10rpx 0;
+
 						.proposal-container-content-box {
 							// background: #f8f8f8;
 							border-radius: 10rpx;
 							padding: 8rpx 20rpx;
 							margin-bottom: 20rpx;
 						}
+
 						.section {
 							display: -webkit-box;
 							-webkit-box-orient: vertical;
@@ -234,6 +249,7 @@
 							display: flex;
 							justify-content: space-around;
 							margin-top: 20rpx;
+
 							image {
 								width: 180rpx;
 								height: 180rpx;

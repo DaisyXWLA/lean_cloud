@@ -130,7 +130,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-nav-bar/uni-nav-bar.vue */ 195));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniIcon = function uniIcon() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../../components/uni-icons/uni-icons.vue */ 237));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var upload = function upload() {__webpack_require__.e(/*! require.ensure | components/robby-image-upload/robby-image-upload */ "components/robby-image-upload/robby-image-upload").then((function () {return resolve(__webpack_require__(/*! ../../components/robby-image-upload/robby-image-upload.vue */ 259));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-nav-bar/uni-nav-bar.vue */ 215));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniIcon = function uniIcon() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../../components/uni-icons/uni-icons.vue */ 257));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var upload = function upload() {__webpack_require__.e(/*! require.ensure | components/robby-image-upload/robby-image-upload */ "components/robby-image-upload/robby-image-upload").then((function () {return resolve(__webpack_require__(/*! ../../components/robby-image-upload/robby-image-upload.vue */ 288));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -201,11 +203,7 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      imageData: [],
-      categoryArray: [{ name: '品质改善' }, { name: '能力提高' }, { name: '技术改善' }, { name: '提高效率' }],
-      areaArray: [{ name: '中国' }, { name: '美国' }, { name: '巴西' }, { name: '日本' }],
-      categoryIndex: 0,
-      areaIndex: 0 };
+      imageData: [] };
 
   },
   methods: {
@@ -219,14 +217,15 @@ __webpack_require__.r(__webpack_exports__);
     addImage: function addImage(e) {
       console.log(e);
     },
-    selectCategory: function selectCategory() {},
-    categoryChange: function categoryChange(e) {
-      console.log('picker发送选择改变，携带值为：' + e.detail.value);
-      this.categoryIndex = e.detail.value;
+    selectCategory: function selectCategory() {
+      uni.redirectTo({
+        url: "proposal-category/proposal-category" });
+
     },
-    areaChange: function areaChange(e) {
-      console.log('picker发送选择改变，携带值为：' + e.detail.value);
-      this.areaIndex = e.detail.value;
+    selectArea: function selectArea() {
+      uni.redirectTo({
+        url: "area/area" });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

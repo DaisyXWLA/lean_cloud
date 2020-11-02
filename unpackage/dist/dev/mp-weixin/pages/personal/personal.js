@@ -92,7 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  uniPopup: function() {
+    return Promise.all(/*! import() | components/uni-popup/uni-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-popup/uni-popup")]).then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 383))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -130,7 +134,54 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-nav-bar/uni-nav-bar.vue */ 195));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-nav-bar/uni-nav-bar.vue */ 215));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniIcon = function uniIcon() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../../components/uni-icons/uni-icons.vue */ 257));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniList = function uniList() {__webpack_require__.e(/*! require.ensure | components/uni-list/uni-list */ "components/uni-list/uni-list").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 229));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniListItem = function uniListItem() {__webpack_require__.e(/*! require.ensure | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 236));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -144,7 +195,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 {
-  components: { uniNavBar: uniNavBar },
+  components: {
+    uniNavBar: uniNavBar,
+    uniIcon: uniIcon,
+    uniList: uniList,
+    uniListItem: uniListItem },
+
   data: function data() {
     return {};
 
@@ -156,7 +212,39 @@ __webpack_require__.r(__webpack_exports__);
         url: '../index/index' });
 
     },
-    clickRight: function clickRight() {} } };exports.default = _default;
+    clickRight: function clickRight() {
+      console.log('用户信息修改成功');
+    },
+    modifyPortrait: function modifyPortrait() {
+      this.$refs.popup.open();
+    },
+    selectPhoto: function selectPhoto() {
+      uni.chooseImage({
+        sourceType: ['album'],
+        success: function success(res) {
+          console.log(res);
+          console.log('----------------------------------');
+        },
+        fail: function fail(err) {
+          console.log(err);
+        } });
+
+    },
+    selectCamera: function selectCamera() {
+      uni.chooseImage({
+        sourceType: ['camera'],
+        success: function success(res) {
+          console.log(res);
+          console.log('----------------------------------');
+        },
+        fail: function fail(err) {
+          console.log(err);
+        } });
+
+    },
+    close: function close() {
+      this.$refs.popup.close();
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -24,7 +24,42 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.return.data-v-3df0de86 {
-  width: 40rpx;
+.personal-portrait image.data-v-3df0de86 {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  border: 1px solid #f2f2f2;
+  vertical-align: middle;
+}
+.personal-portrait.data-v-3df0de86 .uni-list-item__content-title {
+  line-height: 80rpx;
+  color: #666;
+}
+.personal-portrait.data-v-3df0de86 .uni-list--border-top {
+  height: 0;
+}
+.personal-portrait.data-v-3df0de86 .uni-list--border-bottom {
+  height: 0;
+}
+.personal-portrait.data-v-3df0de86 .uni-popup__wrapper-box {
+  background: #fff;
+  text-align: center;
+}
+.personal-portrait.data-v-3df0de86 .uni-popup__wrapper-box text {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  line-height: 70rpx;
+}
+.personal-info.data-v-3df0de86 {
+  margin-top: 20rpx;
+}
+.personal-info.data-v-3df0de86 .uni-list--border-top {
+  height: 0;
+}
+.personal-info input.data-v-3df0de86 {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
 }
 

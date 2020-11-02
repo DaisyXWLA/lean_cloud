@@ -74,7 +74,11 @@
 				<!-- <button size="mini" class="refuse-btn" @click="refuse">拒绝</button> -->
 				<button size="mini" class="finish-btn" @click="finish">完成</button>
 				<button size="mini" class="accept-btn" @click="accept">验收</button>
-				<uni-popup ref="popup" type="bottom">底部弹出 Popup</uni-popup>
+				<uni-popup ref="popup" type="bottom">
+					<text @click="selectDepartment">支持部门</text>
+					<text @click="selectMemeber">指定员工</text>
+					<text @click="close">取消</text>
+				</uni-popup>
 			</view>
 			<view>
 				<button size="mini" class="transfer-btn">转移</button>
@@ -133,6 +137,19 @@
 				uni.redirectTo({
 					url: "../accept/accept"
 				})
+			},
+			selectDepartment(){
+				uni.redirectTo({
+					url: "../checkDept/checkDept"
+				})
+			},
+			selectMemeber(){
+				uni.redirectTo({
+					url: "../checkMember/checkMember"
+				})
+			},
+			close(){
+				this.$refs.popup.close()
 			}
 		}
 	}
@@ -340,6 +357,16 @@
 
 		.accept-btn {
 			background: #539CF8;
+		}
+		/deep/ .uni-popup__wrapper-box{
+			background: #fff;
+			text-align: center;
+			text{
+				font-size: 28rpx;
+				color: #666;
+				display: block;
+				line-height: 70rpx;
+			}
 		}
 	}
 </style>

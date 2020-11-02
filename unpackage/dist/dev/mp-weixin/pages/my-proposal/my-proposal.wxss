@@ -196,4 +196,14 @@
 .footer .accept-btn.data-v-2de701ee {
   background: #539CF8;
 }
+.footer.data-v-2de701ee .uni-popup__wrapper-box {
+  background: #fff;
+  text-align: center;
+}
+.footer.data-v-2de701ee .uni-popup__wrapper-box text {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  line-height: 70rpx;
+}
 

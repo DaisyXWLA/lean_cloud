@@ -25,21 +25,21 @@
 						</uniListItem>
 					</uniList>
 					<uniList>
-						<uniListItem title="我的积分" clickable to="/pages/personal/personal">
+						<uniListItem title="我的积分" clickable to="/pages/integral/integral">
 							<template slot="header">
 								<image class="slot-image" src="../../static/icon/integral.png" mode="widthFix"></image>
 							</template>
 						</uniListItem>
 					</uniList>
 					<uniList>
-						<uniListItem title="修改密码" clickable to="/pages/personal/personal">
+						<uniListItem title="修改密码" clickable to="/pages/password/password">
 							<template slot="header">
 								<image class="slot-image" src="../../static/icon/password.png" mode="widthFix"></image>
 							</template>
 						</uniListItem>
 					</uniList>
 					<uniList>
-						<uniListItem title="意见反馈" clickable to="/pages/personal/personal">
+						<uniListItem title="意见反馈" clickable to="/pages/feedback/feedback">
 							<template slot="header">
 								<image class="slot-image" src="../../static/icon/opinion.png" mode="widthFix"></image>
 							</template>
@@ -157,7 +157,7 @@
 		},
 		onLoad() {
 			uni.request({
-				url: this.apiServer + '/index/getIndexMenu',
+				url: '/index/getIndexMenu',
 				dataType: 'json', //默认 json格式
 				method: 'get', //请求方式
 				success: (res) => {
@@ -166,6 +166,7 @@
 				},
 				fail: (error) => {
 					console.log(error)
+					console.log('---------------------------')
 				}
 			})
 		},

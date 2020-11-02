@@ -17,9 +17,10 @@
 					提案类别
 				</view>
 				<view class="picker">
-					<picker @change="categoryChange" :value="categoryIndex" :range="categoryArray" range-key="name">
+					<!-- <picker @change="categoryChange" :value="categoryIndex" :range="categoryArray" range-key="name">
 						<view>{{categoryArray[categoryIndex].name}}</view>
-					</picker>
+					</picker> -->
+					<input type="text" placeholder="请选择提案类别" value="" disabled @click="selectCategory"/>
 				</view>
 				<view class="icon">
 					<uniIcon type="arrowright" size="20" color="#999" ></uniIcon>
@@ -30,9 +31,10 @@
 					区域
 				</view>
 				<view class="picker">
-					<picker @change="areaChange" :value="areaIndex" :range="areaArray" range-key="name">
+					<!-- <picker @change="areaChange" :value="areaIndex" :range="areaArray" range-key="name">
 						<view>{{areaArray[areaIndex].name}}</view>
-					</picker>
+					</picker> -->
+					<input type="text" placeholder="请选择区域" value="" disabled @click="selectArea"/>
 				</view>
 				<view class="icon">
 					<uniIcon type="arrowright" size="20" color="#999" ></uniIcon>
@@ -70,10 +72,6 @@
 		data() {
 			return {
 				 imageData : [],
-				 categoryArray: [{name:'品质改善'},{name: '能力提高'}, {name:'技术改善'}, {name:'提高效率'}],
-				 areaArray:[{name:'中国'},{name: '美国'}, {name:'巴西'}, {name:'日本'}],
-				 categoryIndex: 0,
-				 areaIndex:0
 			}
 		},
 		methods: {
@@ -87,15 +85,16 @@
 			addImage (e) {
 				console.log(e)
 			},
-			selectCategory(){},
-			categoryChange(e) {
-				console.log('picker发送选择改变，携带值为：' + e.detail.value)
-				this.categoryIndex = e.detail.value
+			selectCategory(){
+				uni.redirectTo({
+					url:"proposal-category/proposal-category"
+				})
 			},
-			areaChange(e) {
-				console.log('picker发送选择改变，携带值为：' + e.detail.value)
-				this.areaIndex = e.detail.value
-			},
+			selectArea(){
+				uni.redirectTo({
+					url:"area/area"
+				})
+			}
 		}
 	}
 </script>
@@ -132,6 +131,11 @@
 				text-align: right;
 				color: #999;
 				font-size: 28rpx;
+				input {
+					text-align: right;
+					font-size: 28rpx;
+					color: #999;
+				}
 			}
 		}
 		.section{

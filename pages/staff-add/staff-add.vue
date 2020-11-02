@@ -36,6 +36,14 @@
 				<text>部门</text>
 				<input focus placeholder="请输入部门" placeholder-style="color:#BBC0D4;font-size:28rpx"/>
 			</view>
+			<view class="section">
+				<text>职务</text>
+				<input focus placeholder="请输入部门" placeholder-style="color:#BBC0D4;font-size:28rpx"/>
+			</view>
+			<view class="section">
+				<text>上级用户</text>
+				<input focus placeholder="请输入部门" placeholder-style="color:#BBC0D4;font-size:28rpx"/>
+			</view>
 		</view>
 	</view>
 </template>

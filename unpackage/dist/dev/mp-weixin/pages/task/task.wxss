@@ -24,11 +24,16 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.tab.data-v-96a65fb4 {
+  top: 150rpx;
+}
+.tab.data-v-96a65fb4 .segmented-control__text {
+  font-size: 32rpx;
+}
 .task-container .task-container-content .tab.data-v-96a65fb4 {
   background: #fff;
   border-bottom: 1px solid #f2f2f2;
   position: fixed;
-  top: 88rpx;
   width: 100%;
   z-index: 9999;
 }
