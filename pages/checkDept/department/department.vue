@@ -11,11 +11,8 @@
 		</view>
 
 		<view class="department-list">
-			<uniList>
-				<uniListItem title="技术部" showArrow clickable @click="selectDepartment"></uniListItem>
-			</uniList>
-			<uniList>
-				<uniListItem title="财务部" showArrow clickable @click="selectDepartment"></uniListItem>
+			<uniList v-for="item in departmentList" :key="item.id">
+				<uniListItem :title="item.name" showArrow clickable @click="selectDepartment(item.name,item.id)"></uniListItem>
 			</uniList>
 		</view>
 	</view>
@@ -37,24 +34,60 @@
 		},
 		data() {
 			return {
-
+				moduleId: '',
+				departmentList: []
 			}
 		},
-		onLoad() {
-
+		onLoad(option) {
+			this.token = uni.getStorageSync('token')
+			this.moduleId = option.moduleId
+			this.getData()
 		},
 		methods: {
 			back() {
-				uni.redirectTo({
-					url: "../checkDept"
-				})
+				if (this.moduleId == 1) {
+					uni.navigateBack({
+						url: "../../personal/personal"
+					})
+				} else if (this.moduleId == 2) {
+					uni.redirectTo({
+						url: "../checkDept"
+					})
+				}
 			},
 			search() {
 				console.log('点击了搜索')
 			},
-			selectDepartment() {
-				uni.redirectTo({
-					url: "../checkDept?departmentName=软件部"
+			selectDepartment(name, id) {
+				if (this.moduleId == 1) {
+					// uni.navigateBack({
+					// 	url: `../../personal/personal?departmentName=${name}&departmentId=${id}`
+					// })
+					var pages = getCurrentPages();
+					var prevPage = pages[pages.length - 2]; //上一个页面
+					prevPage.$vm.departmentName = name
+					prevPage.$vm.departmentId = id
+					uni.navigateBack({}) //返回
+				} else if (this.moduleId == 2) {
+					uni.redirectTo({
+						url: `../checkDept?departmentName=${name}`
+					})
+				}
+
+			},
+			getData() {
+				uni.request({
+					url: `/api/dept/list`,
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						this.departmentList = res.data.obj
+					},
+					fail: (error) => {
+						console.log(error)
+					}
 				})
 			}
 		}
@@ -65,20 +98,28 @@
 	/deep/ .uni-navbar--border {
 		border: none;
 	}
-	.department-search{
+
+	.department-search {
 		background: #4378BE;
+
 		/deep/ .uni-searchbar {
 			background: none;
 		}
+
 		/deep/ .uni-searchbar__cancel {
 			color: #fff;
 		}
 	}
+
 	.department-list {
 		margin-top: 20rpx;
 
 		/deep/ .uni-list--border-top {
 			height: 0;
+		}
+
+		/deep/ .uni-list--border-bottom {
+			background: #f2f2f2;
 		}
 	}
 </style>

@@ -1,11 +1,11 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		// {
-		// 	"path": "pages/login/login"
-		// 	// "style": {
-		// 	// 	"navigationStyle":"custom"
-		// 	// }
-		// },
+		{
+			"path": "pages/login/login"
+			// "style": {
+			// 	"navigationStyle":"custom"
+			// }
+		},
 		{
 			"path": "pages/index/index"
 			// "style": {
@@ -159,7 +159,7 @@
 
 		}
 	    ,{
-            "path" : "pages/checkMember/member/member",
+            "path" : "pages/member/member",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -168,7 +168,7 @@
             
         }
         ,{
-            "path" : "pages/checkMember/member/member-list/member-list",
+            "path" : "pages/member-list/member-list",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -212,12 +212,45 @@
             }
             
         }
+        ,{
+            "path" : "pages/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/duty/duty",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/leader/leader",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/comment/comment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
-		"navigationStyle": "custom",
-		"usingComponents": {
-			"ly-tree-node": "/components/ly-tree/ly-tree-node"
-		}
+		"navigationStyle": "custom"
 	},
 	"tabBar": {
 		"backgroundColor": "#FFFFFF",
@@ -253,5 +286,8 @@
 				"selectedIconPath": "static/icon/idea-selected@2x.png"
 			}
 		]
+	},
+	"easycom":{
+		"uni-(.*)":"@/components/uni-$1/uni-$1.vue"
 	}
 }

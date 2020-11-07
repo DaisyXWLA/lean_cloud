@@ -8,26 +8,20 @@
 		</uniNavBar>
 		<view class="integral-container">
 			<view class="integral-container-header">
-				<text class="available-integral">5999</text>
-				<text class="all-integral">累计积分：6000</text>
+				<text class="available-integral">{{existingIntegral==null?'0':existingIntegral}}</text>
+				<text class="all-integral">累计积分：{{aggregateScore==null?'0':aggregateScore}}</text>
 			</view>
 		</view>
-		<view class="integral-content">
+		<view class="integral-list-empty" v-if="integralList.length==0">
+			暂无数据
+		</view>
+		<view class="integral-content" v-else>
 			<view class="integral-content-title">
 				<text>时间</text>
 				<text>明细</text>
 			</view>
-			<uniList>
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
-				<uni-list-item title="采纳建议" note="2020-10-29 16:20" rightText="+10" />
+			<uniList v-for="item in integralList" :key="item.id">
+				<uni-list-item title="采纳建议" :note="timeFormat(item.create_time)" :rightText="item.point_change" />
 			</uniList>
 		</view>
 	</view>
@@ -47,15 +41,55 @@
 		},
 		data() {
 			return {
-
+				integralId: '',
+				integralList: [],
+				aggregateScore:'', //总积分
+				existingIntegral:'',//现有积分
 			};
+		},
+		onLoad(option) {
+			// console.log(option)
+			this.token = uni.getStorageSync('token')
+			this.integralId = option.integralId
+			this.getData()
 		},
 		methods: {
 			back() {
-				uni.redirectTo({
-					url: "../message/message"
+				if (this.integralId == 0) {
+					uni.redirectTo({
+						url: "../index/index"
+					})
+				} else if (this.integralId == 1) {
+					uni.navigateBack({
+						url: "../message/message"
+					})
+				}
+
+			},
+			//获取数据
+			getData() {
+				uni.request({
+					url: `/api/pointDetail/list`,
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						console.log(res)
+						this.aggregateScore=res.data.obj.allpoint //总积分
+						this.existingIntegral=res.data.obj.point
+						this.integralList = res.data.obj.jyyPage.records
+					},
+					fail: (error) => {
+						console.log(error)
+					}
 				})
 			},
+			timeFormat(time) {
+				let date = new Date(time)
+				let newTime = `${date.getMonth()+1}月${date.getDate()}日  ${date.getHours()}:${date.getMinutes()}`
+				return newTime
+			}
 		}
 	}
 </script>
@@ -88,24 +122,35 @@
 		}
 	}
 
+	.integral-list-empty {
+		font-size: 40rpx;
+		color: #C0C4CC;
+		text-align: center;
+		margin-top: 300rpx;
+	}
+
 	.integral-content {
 		background: #fff;
 		margin-top: 20rpx;
+
 		.integral-content-title {
 			padding: 30rpx;
 			display: flex;
 			justify-content: space-between;
+
 			text {
 				font-size: 32rpx;
 				color: #999;
 			}
 
 		}
-		/deep/ .uni-list-item__content-title{
+
+		/deep/ .uni-list-item__content-title {
 			font-size: 32rpx;
 			color: #333;
 		}
-		/deep/ .uni-list-item__extra-text{
+
+		/deep/ .uni-list-item__extra-text {
 			font-size: 36rpx;
 			color: #4378BE;
 		}

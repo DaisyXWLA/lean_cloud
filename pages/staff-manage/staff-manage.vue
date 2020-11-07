@@ -1,8 +1,7 @@
 <template>
 	<view>
 		<!-- 导航 -->
-		<uniNavBar :status-bar="true" background-color="#4378BE" right-text="新增" color="#ffffff" title="员工管理" fixed
-		 @clickRight="add">
+		<uniNavBar :status-bar="true" background-color="#4378BE" color="#ffffff" title="员工管理" fixed>
 			<template slot="left">
 				<uniIcon type="arrowleft" size="28" color="#ffffff" @click="back"></uniIcon>
 			</template>
@@ -11,11 +10,8 @@
 			<uniSearchBar placeholder="请输入部门名称" radius="20" bgColor="#fff" @confirm="search"></uniSearchBar>
 		</view>
 		<view class="department-list">
-			<uniList>
-				<uniListItem title="技术部" showArrow clickable @click="selectDepartment"></uniListItem>
-			</uniList>
-			<uniList>
-				<uniListItem title="财务部" showArrow clickable @click="selectDepartment"></uniListItem>
+			<uniList v-for="item in departmentList" :key="item.id">
+				<uniListItem :title="item.name" showArrow clickable @click="selectMember(item.id,item.name)"></uniListItem>
 			</uniList>
 		</view>
 	</view>
@@ -36,25 +32,44 @@
 			uniListItem
 		},
 		data() {
-			return {}
+			return {
+				departmentList: []
+			}
 		},
 		onLoad() {
-
+			this.token = uni.getStorageSync('token')
+			this.getData()
 		},
 		methods: {
+			getData() {
+				uni.request({
+					url: `/api/dept/list`,
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						// console.log(res)
+						this.departmentList = res.data.obj
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
 			back() {
 				uni.redirectTo({
 					url: "../index/index"
 				})
 			},
-			add() {
-				uni.redirectTo({
-					url: "../staff-add/staff-add"
-				})
-			},
 			search() {
 				console.log('点击了搜索')
 			},
+			selectMember(id,name) {
+				uni.redirectTo({
+					url: `../member-list/member-list?moduleId=0&departmentId=${id}&departmentName=${name}`
+				})
+			}
 		}
 	}
 </script>
@@ -75,11 +90,15 @@
 			color: #fff;
 		}
 	}
+
 	.department-list {
 		margin-top: 20rpx;
 
 		/deep/ .uni-list--border-top {
 			height: 0;
+		}
+		/deep/ .uni-list--border-bottom{
+			background: #f2f2f2;
 		}
 	}
 </style>

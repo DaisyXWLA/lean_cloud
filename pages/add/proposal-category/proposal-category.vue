@@ -9,11 +9,8 @@
 			<uniSearchBar placeholder="请输入类别名称" radius="20" bgColor="#fff" @confirm="search"></uniSearchBar>
 		</view>
 		<view class="category-list">
-			<uniList>
-				<uniListItem title="Julie" showArrow clickable @click="selectCategory"></uniListItem>
-			</uniList>
-			<uniList>
-				<uniListItem title="Maria" clickable @click="selectCategory"></uniListItem>
+			<uniList v-for="item in categoryList" :key="item.id">
+				<uniListItem :title="item.name" clickable @click="selectCategory(item.name,item.id)"></uniListItem>
 			</uniList>
 		</view>
 	</view>
@@ -35,20 +32,46 @@
 		},
 		data() {
 			return {
-				
+				categoryList:[],
+				categoryName:'',
+				categoryId:''
 			}
 		},
+		onLoad() {
+			this.token = uni.getStorageSync('token')
+			this.getData()
+		},
 		methods: {
+			getData(){
+				uni.request({
+					url: `/api/proposalType/list`,
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						this.categoryList=res.data.obj
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
 			back(){
 				uni.switchTab({
 					url:"../add"
 				})
 			},
 			search(){},
-			selectCategory(){
-				console.log('选择类别')
+			selectCategory(name,id){
 				uni.switchTab({
-					url:"../add?categoryName=能力提高"
+					url:`../add`,
+					success:()=>{
+						uni.setStorageSync('categoryInfo',{
+							categoryName:name,
+							categoryId:id
+						})
+					}
 				})
 			}
 		}
@@ -70,5 +93,19 @@
 	}
 	/deep/ .uni-list--border-top{
 		height: 0;
+	}
+	
+	.category-list{
+		margin-top: 10rpx;
+		/deep/ .uni-list-item__content-title{
+			color: #333;
+		}
+		/deep/ .uni-list--border-top {
+			height: 0;
+		}
+		
+		/deep/ .uni-list--border-bottom {
+			background:#f2f2f2;
+		}
 	}
 </style>

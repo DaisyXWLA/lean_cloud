@@ -13,72 +13,81 @@
 				</view>
 				<view class="content">
 					<view v-if="current === 0">
-						<view class="proposal-container" @click="detail">
-							<view class="proposal-container-header">
-								<view class="portrait">
-									<image src="../../static/portrait.png" mode="aspectFit"></image>
-								</view>
-								<view class="info">
-									<view class="title">对施工现场油污处理的建议</view>
-									<view class="name-time">
-										<text class="name">Julie</text>
-										<text class="time">2020-10-28 10:28</text>
+						<view class="content-empty" v-if="taskList.length==0">
+							暂无数据
+						</view>
+						<view v-else v-for="item in taskList" :key="item.id">
+							<view class="proposal-container" @click="detail(item.id)">
+								<view class="proposal-container-header">
+									<view class="portrait">
+										<image src="../../static/portrait.png" mode="aspectFit"></image>
 									</view>
-								</view>
-								<view class="status">待审核</view>
-							</view>
-							<view class="proposal-container-content">
-								<view class="proposal-container-content-box">
-									<view class="section">
-										<text class="txt">现状：</text>
-										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+									<view class="info">
+										<view class="title">{{item.title}}</view>
+										<view class="name-time">
+											<text class="name">{{item.realName}}</text>
+											<text class="time">{{timeFormat(item.createTime)}}</text>
+										</view>
 									</view>
-									<view class="section">
-										<text class="txt">建议：</text>
-										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
-									</view>
+									<view class="status">待审核</view>
 								</view>
-								<view class="img">
-									<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
-									<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
-									<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
-									<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
+								<view class="proposal-container-content">
+									<view class="proposal-container-content-box">
+										<view class="section">
+											<text class="txt">现状：</text>
+											<text class="content">{{item.state}}</text>
+										</view>
+										<view class="section">
+											<text class="txt">建议：</text>
+											<text class="content">{{item.proposal}}</text>
+										</view>
+									</view>
+									<view class="img">
+										<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
+										<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
+										<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
+										<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
+									</view>
 								</view>
 							</view>
 						</view>
-
 					</view>
 					<view v-if="current === 1">
-						<view class="proposal-container" @click="detail">
-							<view class="proposal-container-header">
-								<view class="portrait">
-									<image src="../../static/portrait.png" mode="aspectFit"></image>
-								</view>
-								<view class="info">
-									<view class="title">对施工现场油污处理的建议</view>
-									<view class="name-time">
-										<text class="name">Julie</text>
-										<text class="time">2020-10-28 10:28</text>
+						<view class="content-empty" v-if="taskList.length==0">
+							暂无数据
+						</view>
+						<view v-else v-for="item in taskList" :key="item.id">
+							<view class="proposal-container" @click="detail(item.id)">
+								<view class="proposal-container-header">
+									<view class="portrait">
+										<image src="../../static/portrait.png" mode="aspectFit"></image>
 									</view>
-								</view>
-								<view class="status">待审核</view>
-							</view>
-							<view class="proposal-container-content">
-								<view class="proposal-container-content-box">
-									<view class="section">
-										<text class="txt">现状：</text>
-										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
+									<view class="info">
+										<view class="title">{{item.title}}</view>
+										<view class="name-time">
+											<text class="name">{{item.realName}}</text>
+											<text class="time">{{timeFormat(item.createTime)}}</text>
+										</view>
 									</view>
-									<view class="section">
-										<text class="txt">建议：</text>
-										<text class="content">施工现场对一项项目工程来说，是工程建设的起点，也是工程建设最为直接的场所。所有施工人员运用相关技术手段，结合人力物力以及财力完成某项工程的场地。而施工现场管理是工程项目管理的关键部分，只有加强施工现场管理，才能保证工程质量、降低成本、缩短工期，提高建筑企业在市场中的竞争力，对建筑企业生存和发展起着重要作用。</text>
-									</view>
+									<view class="status">待审核</view>
 								</view>
-								<view class="img">
-									<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
-									<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
-									<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
-									<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
+								<view class="proposal-container-content">
+									<view class="proposal-container-content-box">
+										<view class="section">
+											<text class="txt">现状：</text>
+											<text class="content">{{item.state}}</text>
+										</view>
+										<view class="section">
+											<text class="txt">建议：</text>
+											<text class="content">{{item.proposal}}</text>
+										</view>
+									</view>
+									<view class="img">
+										<image src="../../static/scenery-1.jpg" mode="aspectFill"></image>
+										<image src="../../static/scenery-2.jpg" mode="aspectFill"></image>
+										<image src="../../static/scenery-3.jpg" mode="aspectFill"></image>
+										<!-- <image src="../../static/scenery-4.jpg" mode="aspectFill"></image> -->
+									</view>
 								</view>
 							</view>
 						</view>
@@ -104,10 +113,33 @@
 		data() {
 			return {
 				items: ["待处理", "已处理"],
-				current: 0
+				current: 0,
+				taskList: []
 			}
 		},
+		onLoad(option) {
+			this.token = uni.getStorageSync('token')
+			this.getData(this.current)
+		},
 		methods: {
+			getData(status) {
+				uni.request({
+					url: `/api/proposal/getProposalSponsorUserId`,
+					data: {
+						buttonType: status
+					},
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						this.taskList = res.data.obj.records
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
 			back() {
 				uni.redirectTo({
 					url: "../index/index"
@@ -122,7 +154,18 @@
 				if (this.current !== e.currentIndex) {
 					this.current = e.currentIndex;
 				}
-			}
+				this.getData(e.currentIndex)
+			},
+			timeFormat(time) {
+				let date = new Date(time)
+				let newTime =
+					`${date.getFullYear()}-${this.addZero(date.getMonth()+1)}-${this.addZero(date.getDate())}  ${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}`
+				return newTime
+			},
+			//时间补零
+			addZero(time) {
+				return time < 10 ? `0${time}` : time
+			},
 		}
 	}
 </script>
@@ -131,10 +174,12 @@
 	// #ifdef  MP-WEIXIN
 	.tab {
 		top: 150rpx;
+
 		/deep/ .segmented-control__text {
 			font-size: 32rpx;
 		}
 	}
+
 	// #endif
 	// #ifdef  H5
 	.tab {
@@ -163,6 +208,13 @@
 
 			.content {
 				margin-top: 72rpx;
+
+				.content-empty {
+					font-size: 40rpx;
+					color: #C0C4CC;
+					text-align: center;
+					margin-top: 500rpx;
+				}
 
 				.proposal-container {
 					padding: 30rpx;

@@ -7,17 +7,20 @@
 			</template>
 		</uniNavBar>
 		<!-- 列表 -->
-		<view class="notice-list">
-			<view class="notice-list-container" @click="detail">
+		<view class="notice-list-empty" v-if="noticeList.length==0">
+			暂无数据
+		</view>
+		<view class="notice-list" v-for="item in noticeList" :key="item.id">
+			<view class="notice-list-container" @click="detail(item.id)">
 				<view class="notice-list-container-content">
-					<view class="title">美空军轰炸机现身台湾东南海域</view>
+					<view class="title">{{item.title}}</view>
 					<view class="content">
-						“飞机守望”24日晚间在推特上发布消息称，“美国空军B-1B轰炸机HUGE01和HUGE02从关岛安德森空军基地出发前往南海。美国空军（加油机）KC-135R PEARL11提供了加油机支持。”此外该推特还发布了有关飞行路线图，但并未提及此次行动时间。
+						{{item.content}}
 					</view>
 				</view>
 				<view class="notice-list-container-detail">
-					<text>Andy</text>
-					<text>2020-10-26 14:25</text>
+					<text>{{item.createName}}</text>
+					<text>{{timeFormat(item.createTime)}}</text>
 				</view>
 			</view>
 		</view>
@@ -31,8 +34,14 @@
 		components:{uniNavBar,uniIcon},
 		data() {
 			return {
-				
+				isRead:'',
+				noticeList:[]
 			}
+		},
+		onLoad(option) {
+			this.token = uni.getStorageSync('token')
+			this.isRead=option.isRead
+			this.getData()
 		},
 		methods: {
 			back () {
@@ -40,16 +49,48 @@
 					url:'../index/index'
 				})
 			},
-			detail () {
+			detail (id) {
 				uni.redirectTo({
-					url:'./notice-detail/notice-detail'
+					url:`./notice-detail/notice-detail?reportId=${id}`
 				})
+			},
+			//获取列表数据
+			getData(){
+				// console.log(this.isRead)
+				uni.request({
+					url: `/api/report/list`,
+					data:{
+						isRead:this.isRead
+					},
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						// console.log(res)
+						this.noticeList=res.data.obj.records
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
+			timeFormat(time){
+				let date=new Date(time)
+				let newTime=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}  ${date.getHours()}:${date.getMinutes()}`
+				return newTime
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+	.notice-list-empty{
+		font-size: 40rpx;
+		color: #C0C4CC;
+		text-align: center;
+		margin-top: 500rpx;
+	}
 	.notice-list{
 		margin-top:34rpx;
 		padding: 0 30rpx;
@@ -69,7 +110,7 @@
 					color:#999999;
 					display: -webkit-box;
 					-webkit-box-orient: vertical;
-					-webkit-line-clamp: 3;
+					-webkit-line-clamp: 2;
 					overflow: hidden;
 				}
 			}

@@ -9,11 +9,8 @@
 			<uniSearchBar placeholder="请输入区域名称" radius="20" bgColor="#fff" @confirm="search"></uniSearchBar>
 		</view>
 		<view class="area-list">
-			<uniList>
-				<uniListItem title="Julie" clickable @click="selectArea"></uniListItem>
-			</uniList>
-			<uniList>
-				<uniListItem title="Maria" clickable @click="selectArea"></uniListItem>
+			<uniList v-for="item in areaList" :key="item.id">
+				<uniListItem :title="item.name" clickable @click="selectArea(item.name,item.id)"></uniListItem>
 			</uniList>
 		</view>
 	</view>
@@ -35,20 +32,44 @@
 		},
 		data() {
 			return {
-				
+				areaList:[],
 			}
 		},
+		onLoad() {
+			this.token = uni.getStorageSync('token')
+			this.getData()
+		},
 		methods: {
+			getData(){
+				uni.request({
+					url: `/api/area/list`,
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						this.areaList=res.data.obj
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
 			back(){
 				uni.switchTab({
 					url:"../add"
 				})
 			},
 			search(){},
-			selectArea(){
-				console.log('选择区域')
+			selectArea(name,id){
 				uni.switchTab({
-					url:"../add?areaName=能力提高"
+					url:`../add`,
+					success:()=>{
+						uni.setStorageSync('areaInfo',{
+							areaName:name,
+							areaId:id
+						})
+					}
 				})
 			}
 		}
@@ -70,5 +91,18 @@
 	}
 	/deep/ .uni-list--border-top{
 		height: 0;
+	}
+	.area-list{
+		margin-top: 10rpx;
+		/deep/ .uni-list-item__content-title{
+			color: #333;
+		}
+		/deep/ .uni-list--border-top {
+			height: 0;
+		}
+		
+		/deep/ .uni-list--border-bottom {
+			background:#f2f2f2;
+		}
 	}
 </style>

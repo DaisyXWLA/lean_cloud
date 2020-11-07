@@ -25,7 +25,8 @@
 						</uniListItem>
 					</uniList>
 					<uniList>
-						<uniListItem title="我的积分" clickable to="/pages/integral/integral">
+						<uniListItem title="我的积分" clickable to="/pages/integral/integral?integralId=0">
+							<!-- <uniListItem title="我的积分" clickable @click="gotoIntergral"> -->
 							<template slot="header">
 								<image class="slot-image" src="../../static/icon/integral.png" mode="widthFix"></image>
 							</template>
@@ -60,16 +61,16 @@
 		<view class="container">
 			<view class="container-message">
 				<uniList>
-					<uniListChat title="消息提醒" note="您有一条未读消息" badgeText="dot" badgePositon="left" avatar="../../static/icon/message@2x.png"
-					 time="10月23日" to="/pages/message/message"></uniListChat>
+					<uniListChat title="消息提醒" :note="isReadMessage==0?'您有未读消息':'暂无未读消息'" :badgeText="isReadMessage==0?'dot':''"
+					 badgePositon="left" avatar="../../static/icon/message@2x.png" :time="timeMessage" clickable @click="messageList"></uniListChat>
 				</uniList>
 				<uniList>
-					<uniListChat title="企业公告" note="暂无新公告" badgeText="dot" badgePositon="left" avatar="../../static/icon/notice@2x.png"
-					 time="10月23日" to="/pages/notice/notice"></uniListChat>
+					<uniListChat title="企业公告" :note="isReadNotice==0?'您有未读公告':'暂无未读公告'" :badgeText="isReadNotice==0?'dot':''"
+					 badgePositon="left" avatar="../../static/icon/notice@2x.png" :time="timeNotice" clickable @click="noticeList"></uniListChat>
 				</uniList>
 				<uniList>
-					<uniListChat title="任务提醒" note="您有一条未读消息" badgeText="dot" badgePositon="left" avatar="../../static/icon/task@2x.png"
-					 time="10月23日" to="/pages/task-manage/task-manage"></uniListChat>
+					<uniListChat title="任务提醒" :note="isReadTask==0?'您有未读任务提醒':'暂无未读任务提醒'" :badgeText="isReadTask==0?'dot':''"
+					 badgePositon="left" avatar="../../static/icon/task@2x.png" :time="timeTask" clickable @click="taskList"></uniListChat>
 				</uniList>
 			</view>
 			<view class="contianer-workspace">
@@ -84,6 +85,7 @@
 						</uni-grid-item> -->
 						<uni-grid-item :index="0">
 							<image src="../../static/icon/email@2x.png" mode="aspectFit" class="pic"></image>
+							<uniBadge class="uni-badge-left-margin" :text="proposalBadge==0?' ':''" type="error" size="small" />
 							<text class="text">合理化建议</text>
 						</uni-grid-item>
 						<uni-grid-item :index="1" class="border">
@@ -120,7 +122,6 @@
 						</uni-grid-item>
 					</uni-grid>
 				</view>
-
 			</view>
 		</view>
 	</view>
@@ -139,6 +140,8 @@
 	// Grid宫格
 	import uniGrid from "../../components/uni-grid/uni-grid.vue"
 	import uniGridItem from "../../components/uni-grid-item/uni-grid-item.vue"
+	//角标
+	import uniBadge from "../../components/uni-badge/uni-badge.vue"
 	export default {
 		components: {
 			uniNavBar,
@@ -148,27 +151,24 @@
 			uniListChat,
 			uniListBadge,
 			uniGrid,
-			uniGridItem
+			uniGridItem,
+			uniBadge
 		},
 		data() {
 			return {
-
+				token: '',
+				isReadMessage: '',
+				timeMessage: '',
+				isReadNotice: '',
+				timeNotice: '',
+				isReadTask: '',
+				timeTask: '',
+				proposalBadge: ''
 			}
 		},
 		onLoad() {
-			uni.request({
-				url: '/index/getIndexMenu',
-				dataType: 'json', //默认 json格式
-				method: 'get', //请求方式
-				success: (res) => {
-					console.log(res)
-					console.log('---------------------------')
-				},
-				fail: (error) => {
-					console.log(error)
-					console.log('---------------------------')
-				}
-			})
+			this.token = uni.getStorageSync('token')
+			this.getData()
 		},
 		methods: {
 			clickLeft() {
@@ -179,6 +179,9 @@
 			},
 			exit() {
 				this.$refs.drawer.close()
+				uni.redirectTo({
+					url: "../login/login"
+				})
 			},
 			goto(obj) {
 				if (obj.detail.index == 0) {
@@ -186,6 +189,130 @@
 						url: "../proposal/proposal"
 					})
 				}
+			},
+			// gotoIntergral(){
+			// 	console.log('返回首页')
+			// 	uni.redirectTo({
+			// 		url:"../integral/integral?integralId=0",
+			// 		// success:(res)=>{
+			// 		// 	this.$refs.drawer.close()
+			// 		// }
+			// 	})
+			// },
+			// 获取首页数据
+			getData() {
+				// 系统消息
+				uni.request({
+					url: `/api/news/index`,
+					method: 'get', //请求方式
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						console.log(res)
+						this.isReadMessage = res.data.obj.isRead
+						if (res.data.obj.time === null) {
+							return
+						}
+						this.timeMessage = this.getTime(res.data.obj.time)
+						// console.log(this.timeMessage)
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+				//获取未读公告
+				uni.request({
+					url: `/api/report/index`,
+					method: 'get', //请求方式
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						// console.log(res)
+						this.isReadNotice = res.data.obj.isRead
+						this.timeNotice = this.getTime(res.data.obj.time)
+					},
+					fail: (error) => {
+						console.log(error)
+						console.log('---------------------------')
+					}
+				})
+				// 获取未读任务
+				uni.request({
+					url: `/api/task/index`,
+					method: 'get', //请求方式
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						// console.log(res)
+						this.isReadTask = res.data.obj.isRead
+						this.timeTask = this.getTime(res.data.obj.time)
+					},
+					fail: (error) => {
+						console.log(error)
+						console.log('---------------------------')
+					}
+				})
+				//获取九宫格未处理数据
+				uni.request({
+					url: `/api/index/getIndexMenu`,
+					method: 'get', //请求方式
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						// console.log(res)
+						for (let i = 0; i < res.data.obj.length; i++) {
+							if (res.data.obj[i].id == 1) {
+								this.proposalBadge = res.data.obj[i].tasks
+							}
+						}
+					},
+					fail: (error) => {
+						console.log(error)
+						console.log('---------------------------')
+					}
+				})
+			},
+			//获取当天时间
+			getTime(time) {
+				let date = new Date();
+				if (new Date(time).getMonth() == date.getMonth() && new Date(time).getDate() == date.getDate() - 1) {
+					time = '昨天'
+					return time
+				} else if (new Date(time).getMonth() == date.getMonth() && new Date(time).getDate() == date.getDate()) {
+					time = `${this.addZero(new Date(time).getHours())}:${this.addZero(new Date(time).getMinutes())}`
+					return time
+				} else {
+					time = `${this.addZero(new Date(time).getMonth()+1)}月${this.addZero(new Date(time).getDate())}日`
+					return time
+				}
+			},
+			//时间补零
+			addZero(time) {
+				return time < 10 ? `0${time}` : time
+			},
+			//获取列表数据
+			messageList() {
+				uni.redirectTo({
+					url: `../message/message?isRead=${this.isReadMessage}`
+				})
+			},
+			noticeList() {
+				uni.redirectTo({
+					url: `../notice/notice?isRead=${this.isReadNotice}`
+				})
+			},
+			taskList() {
+				uni.redirectTo({
+					url: `../task-manage/task-manage?isRead=${this.isReadTask}`
+				})
 			}
 		}
 	}
@@ -235,6 +362,10 @@
 				height: 0;
 			}
 
+			/deep/ .uni-list--border-bottom {
+				background: #f2f2f2;
+			}
+
 			/deep/ .uni-list-item__content-title {
 				color: #666;
 			}
@@ -252,6 +383,10 @@
 		.container-message {
 			/deep/ .uni-list--border-bottom {
 				height: 0;
+			}
+
+			/deep/ .uni-list--border-top {
+				background: #f2f2f2;
 			}
 
 			/deep/ .uni-list-chat__header {
@@ -283,6 +418,7 @@
 				.pic {
 					width: 80rpx;
 					height: 80rpx;
+
 				}
 
 				.text {
@@ -305,6 +441,16 @@
 
 				/deep/ .uni-grid-item__box {
 					align-items: center;
+					position: relative;
+				}
+
+				/deep/ .uni-badge {
+					width: 24rpx !important;
+					height: 24rpx;
+					position: absolute;
+					top: -8rpx;
+					right: 30rpx;
+					padding: 0;
 				}
 			}
 

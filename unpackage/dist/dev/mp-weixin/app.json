@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/personal/personal",
     "pages/integral/integral",
@@ -27,7 +28,9 @@
     "pages/password/password",
     "pages/feedback/feedback",
     "pages/add/proposal-category/proposal-category",
-    "pages/add/area/area"
+    "pages/add/area/area",
+    "pages/search/search",
+    "pages/duty/duty"
   ],
   "subPackages": [],
   "window": {
@@ -69,7 +72,5 @@
       }
     ]
   },
-  "usingComponents": {
-    "ly-tree-node": "/components/ly-tree/ly-tree-node"
-  }
+  "usingComponents": {}
 }

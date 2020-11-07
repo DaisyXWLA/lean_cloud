@@ -7,28 +7,16 @@
 			</template>
 		</uniNavBar>
 		<!-- 列表 -->
-		<view class="message-list">
-			<view class="message-list-time"><text>10月26日 11:27</text></view>
-			<view class="message-list-container" @click="detail">
-				<view class="message-list-container-content">
-					<view class="title">积分变动提醒</view>
-					<view class="content">
-						您的积分于2020-10-26 11:27发生变化
-					</view>
-				</view>
-				<view class="message-list-container-detail">
-					<text>详情</text>
-					<uniIcon type="arrowright" size="16" color="#999999"></uniIcon>
-				</view>
-			</view>
+		<view class="message-list-empty" v-if="messageList.length==0">
+			暂无数据
 		</view>
-		<view class="message-list">
-			<view class="message-list-time"><text>10月26日 11:27</text></view>
+		<view class="message-list" v-else v-for="item in messageList" :key="item.id">
+			<view class="message-list-time"><text>{{timeFormat(item.createTime)}}</text></view>
 			<view class="message-list-container" @click="detail">
 				<view class="message-list-container-content">
-					<view class="title">积分变动提醒</view>
+					<view class="title">{{item.title}}</view>
 					<view class="content">
-						您的积分于2020-10-26 11:27发生变化
+						{{item.content}}
 					</view>
 				</view>
 				<view class="message-list-container-detail">
@@ -47,8 +35,14 @@
 		components:{uniNavBar,uniIcon},
 		data() {
 			return {
-				
+				isRead:'',
+				messageList:[]
 			}
+		},
+		onLoad(option) {
+			this.token = uni.getStorageSync('token')
+			this.isRead=option.isRead
+			this.getData()
 		},
 		methods: {
 			back () {
@@ -57,10 +51,36 @@
 				})
 			},
 			detail () {
-				uni.redirectTo({
-					url:'../integral/integral'
+				uni.navigateTo({
+					url:'../integral/integral?integralId=1'
 				})
+			},
+			//获取列表数据
+			getData(){
+				// console.log(this.isRead)
+				uni.request({
+					url: `/api/news/list`,
+					data:{
+						isRead:this.isRead
+					},
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						this.messageList=res.data.obj.records
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
+			timeFormat(time){
+				let date=new Date(time)
+				let newTime=`${date.getMonth()+1}月${date.getDate()}日  ${date.getHours()}:${date.getMinutes()}`
+				return newTime
 			}
+			
 		}
 	}
 </script>
@@ -68,6 +88,12 @@
 <style lang="scss" scoped>
 	.return{
 		width: 40rpx;
+	}
+	.message-list-empty{
+		font-size: 40rpx;
+		color: #C0C4CC;
+		text-align: center;
+		margin-top: 500rpx;
 	}
 	.message-list{
 		margin-top:34rpx;

@@ -61,7 +61,7 @@
 			},
 			selectDepartment() {
 				uni.redirectTo({
-					url: "./department/department"
+					url: "./department/department?moduleId=2"
 				})
 			},
 			selectTime () {
