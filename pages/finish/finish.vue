@@ -7,14 +7,13 @@
 			</template>
 		</uniNavBar>
 		<view class="finish-container">
-			<view class="earnings">
+			<!-- <view class="earnings">
 				<label>预计收益（元）</label>
-				<!-- <input type="number" placeholder="请输入预计收益金额" dir="rtl" /> -->
 				<input type="number" placeholder="请输入预计收益金额" />
-			</view>
+			</view> -->
 			<view class="description">
 				<text>描述</text>
-				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入描述信息" />
+				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入描述内容" :value="content" @blur="getContent"/>
 				</view>
 			<view class="accessory">
 				<text>上传照片</text>
@@ -36,21 +35,68 @@
 		data() {
 			return {
 				 imageData : [],
+				 proposalId:'',
+				 processId:'',
+				 userId:'',
+				 flowId:'',
+				 content:'',
+				 moduleFlagId:''
 			}
+		},
+		onLoad(option){
+			this.token = uni.getStorageSync('token')
+			this.proposalId=option.proposalId
+			this.processId=option.processId
+			this.userId=option.userId
+			this.flowId=option.flowId
+			this.moduleFlagId=option.moduleFlagId
 		},
 		methods: {
 			back () {
 				uni.redirectTo({
-					url: "../my-proposal/my-proposal"
+					url: `../my-proposal/my-proposal?id=${this.proposalId}&moduleFlagId=${this.moduleFlagId}`
 				})
 			},
-			finishConfirm () {},
+			finishConfirm () {
+				uni.request({
+					url: "/api/flowProcess/addFlowProcess",
+					data: {
+						proposalId: this.proposalId,
+						prevFlowProcessId:this.processId,
+						prevSponsorUserId:this.userId,
+						flowId:this.flowId,
+						buttonType:4,
+						content:this.content
+					},
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						if (res.data.status == 'SUCCESS') {
+							uni.showToast({
+								icon: 'success',
+								title: '完成！'
+							});	
+							this.content=''
+							this.back()
+						}
+				
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
 			upload () {
 				console.log("上传照片")
 			},
 			deleteImage () {},
 			addImage (e) {
 				console.log(e)
+			},
+			getContent(e){
+				this.content=e.detail.value
 			}
 		}
 	}
@@ -82,7 +128,7 @@
 			padding: 30rpx;
 			background: #fff;
 			text{
-				font-size: 32rpx;
+				font-size: 28rpx;
 				color: #333;
 				
 			}

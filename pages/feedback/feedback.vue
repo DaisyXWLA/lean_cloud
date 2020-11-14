@@ -39,7 +39,7 @@
 			},
 			confirm(){
 				uni.request({
-					url: `/api/opinion/addOpinion`,
+					url:"/api/opinion/addOpinion",
 					data:{
 						content:this.content
 					},

@@ -9,20 +9,26 @@
 				<image class="select" src="../../static/icon/select@2x.png" mode="widthFix"></image>
 			</template>
 		</uniNavBar>
-		<view class="proposal-container" v-for="item in proposalList" :key="item.id">
+		<view class="proposal-empty" v-if="proposalList.length==0">
+			暂无数据
+		</view>
+		<view class="proposal-container" v-else v-for="(item,index) in proposalList" :key="index">
 			<view @click="proposalDetail(item.id)">
 				<view class="proposal-container-header">
 					<view class="portrait">
 						<image src="../../static/portrait.png" mode="aspectFit"></image>
 					</view>
 					<view class="info">
-						<view class="title">{{item.title}}</view>
+						<view :class="item.auditStatus==0?'long-title':'title'">{{item.title}}</view>
 						<view class="name-time">
 							<text class="name">{{item.realName}}</text>
 							<text class="time">{{timeFormat(item.createTime)}}</text>
 						</view>
 					</view>
-					<view class="status" v-if="item.status==0">待审核</view>
+					<view class="status" v-if="item.auditStatus==0">审核未通过</view>
+					<view class="status" v-else-if="item.auditStatus==1">审核中</view>
+					<view class="status" v-else-if="item.auditStatus==2">落实中</view>
+					<view class="status" v-else-if="item.auditStatus==3">已完成</view>
 				</view>
 				<view class="proposal-container-content">
 					<view class="proposal-container-content-box">
@@ -50,8 +56,8 @@
 						<text>留言（{{item.messageCount}}）</text>
 					</view>
 					<view class="icon" @click="changeLike(item.id,item.isLike)">
-						<view :class="item.isLike&&likeSelected?'selected':''">
-							<image :src="item.isLike&&likeSelected?likeIcon:dislikeIcon" mode="aspectFill"></image>
+						<view :class="item.isLike||likeSelected?'selected':''">
+							<image :src="item.isLike||likeSelected?likeIcon:dislikeIcon" mode="aspectFill"></image>
 							<text>点赞（{{likeCount}}）</text>
 						</view>
 					</view>
@@ -75,7 +81,7 @@
 		},
 		data() {
 			return {
-				likeSelected: true,
+				likeSelected: false,
 				proposalList: [],
 				likeIcon: '../../static/icon/like-selected@2x.png',
 				dislikeIcon: '../../static/icon/like@2x.png',
@@ -85,7 +91,7 @@
 				likeCount:''
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			this.token = uni.getStorageSync('token')
 			this.getData()
 		},
@@ -102,18 +108,18 @@
 			},
 			viewComments(id) {
 				uni.redirectTo({
-					url: `../proposal-detail/proposal-detail?flag=1&proposalId=${id}`
+					url: `../proposal-detail/proposal-detail?flag=1&proposalId=${id}&moduleId=4`
 				})
 			},
 			changeLike(id, isLike) {
 				this.likeSelected = !this.likeSelected
 				if (this.likeSelected) {
-					this.likeType = 1
-				} else {
 					this.likeType = 0
+				} else {
+					this.likeType = 1
 				}
 				uni.request({
-					url: `/api/like/toLike`,
+					url: "/api/like/toLike",
 					data: {
 						worksId: id,
 						worksType: 1,
@@ -138,7 +144,7 @@
 			},
 			proposalDetail(id) {
 				uni.redirectTo({
-					url: `../proposal-detail/proposal-detail?proposalId=${id}`
+					url: `../proposal-detail/proposal-detail?proposalId=${id}&moduleId=4`
 				})
 			},
 			getData() {
@@ -148,7 +154,7 @@
 					this.likeType = 0
 				}
 				uni.request({
-					url: `/api/proposal/list`,
+					url: "/api/proposal/list",
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token
@@ -179,7 +185,7 @@
 			//获取列表数据的点赞数与状态
 			getAllLike(){
 				uni.request({
-					url: `/api/like/getLikeToIndex`,
+					url: "/api/like/getLikeToIndex",
 					data:{
 						ids:this.ids.join(','),
 						worksType:1
@@ -219,7 +225,12 @@
 	.select {
 		width: 44rpx;
 	}
-
+	.proposal-empty{
+		font-size: 40rpx;
+		color: #C0C4CC;
+		text-align: center;
+		margin-top: 500rpx;
+	}
 	.proposal-container {
 		background: #fff;
 		margin-bottom: 20rpx;
@@ -244,12 +255,22 @@
 
 			.info {
 				flex: 1;
-
+				.long-title {
+					font-size: 32rpx;
+					color: #333;
+					width: 420rpx;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
 				.title {
 					font-size: 32rpx;
 					color: #333;
+					width: 460rpx;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
-
 				.name-time {
 					font-size: 28rpx;
 					color: #999;

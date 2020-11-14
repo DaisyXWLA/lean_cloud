@@ -8,7 +8,7 @@
 		</uniNavBar>
 		<view class="refuse-container">
 			<text>拒绝原因</text>
-			<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入拒绝原因" />
+			<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入拒绝原因" :value="content" @blur="getContent"/>
 		</view>
 	</view>
 </template>
@@ -20,17 +20,56 @@
 		components:{uniNavBar,uniIcon},
 		data() {
 			return {
-				
+				proposalId:'',
+				processId:'',
+				userId:'',
+				content:'',
+				moduleFlagId:''
 			}
+		},
+		onLoad(option){
+			this.token = uni.getStorageSync('token')
+			this.proposalId=option.proposalId
+			this.processId=option.processId
+			this.userId=option.userId
+			this.moduleFlagId=option.moduleFlagId
 		},
 		methods: {
 			back () {
 				uni.redirectTo({
-					url: "../proposal-detail/proposal-detail"
+					url: `../my-proposal/my-proposal?id=${this.proposalId}&moduleFlagId=${this.moduleFlagId}`
 				})
 			},
 			refuseConfirm () {
-				console.log('拒绝审核')
+				uni.request({
+					url: "/api/proposal/getProposal",
+					data: {
+						proposalId: this.proposalId,
+						flowId:this.processId,
+						prevSponsorUserId:this.userId,
+						buttonType:0,
+						content:this.content
+					},
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
+						"token": this.token
+					},
+					success: (res) => {
+						if (res.data.status == 'SUCCESS') {
+							uni.showToast({
+								icon: 'success',
+								title: '已拒绝！'
+							});	
+							this.content=''
+						}
+					},
+					fail: (error) => {
+						console.log(error)
+					}
+				})
+			},
+			getContent(e){
+				this.content=e.detail.value
 			}
 		}
 	}
@@ -41,9 +80,8 @@
 		background: #fff;
 		padding: 30rpx;
 		text{
-			cont-size:32rpx;
+			font-size:28rpx;
 			color: #333;
-			font-weight: bold;
 		}
 		textarea{
 			font-size: 28rpx;

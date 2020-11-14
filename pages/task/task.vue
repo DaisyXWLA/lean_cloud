@@ -23,13 +23,16 @@
 										<image src="../../static/portrait.png" mode="aspectFit"></image>
 									</view>
 									<view class="info">
-										<view class="title">{{item.title}}</view>
+										<view :class="item.auditStatus==0?'long-title':'title'">{{item.title}}</view>
 										<view class="name-time">
 											<text class="name">{{item.realName}}</text>
 											<text class="time">{{timeFormat(item.createTime)}}</text>
 										</view>
 									</view>
-									<view class="status">待审核</view>
+									<view class="status" v-if="item.auditStatus==0">审核未通过</view>
+									<view class="status" v-else-if="item.auditStatus==1">审核中</view>
+									<view class="status" v-else-if="item.auditStatus==2">落实中</view>
+									<view class="status" v-else-if="item.auditStatus==3">已完成</view>
 								</view>
 								<view class="proposal-container-content">
 									<view class="proposal-container-content-box">
@@ -63,13 +66,16 @@
 										<image src="../../static/portrait.png" mode="aspectFit"></image>
 									</view>
 									<view class="info">
-										<view class="title">{{item.title}}</view>
+										<view :class="item.auditStatus==0?'long-title':'title'">{{item.title}}</view>
 										<view class="name-time">
 											<text class="name">{{item.realName}}</text>
 											<text class="time">{{timeFormat(item.createTime)}}</text>
 										</view>
 									</view>
-									<view class="status">待审核</view>
+									<view class="status" v-if="item.auditStatus==0">审核未通过</view>
+									<view class="status" v-else-if="item.auditStatus==1">审核中</view>
+									<view class="status" v-else-if="item.auditStatus==2">落实中</view>
+									<view class="status" v-else-if="item.auditStatus==3">已完成</view>
 								</view>
 								<view class="proposal-container-content">
 									<view class="proposal-container-content-box">
@@ -123,8 +129,9 @@
 		},
 		methods: {
 			getData(status) {
+				// this.taskList=[]
 				uni.request({
-					url: `/api/proposal/getProposalSponsorUserId`,
+					url:"/api/proposal/getProposalSponsorUserId",
 					data: {
 						buttonType: status
 					},
@@ -133,6 +140,7 @@
 						"token": this.token
 					},
 					success: (res) => {
+						console.log(res)
 						this.taskList = res.data.obj.records
 					},
 					fail: (error) => {
@@ -145,9 +153,9 @@
 					url: "../index/index"
 				})
 			},
-			detail() {
+			detail(id) {
 				uni.redirectTo({
-					url: "../my-proposal/my-proposal"
+					url: `../my-proposal/my-proposal?id=${id}&moduleFlagId=2`
 				})
 			},
 			clickItem(e) {
@@ -174,18 +182,20 @@
 	// #ifdef  MP-WEIXIN
 	.tab {
 		top: 150rpx;
-
 		/deep/ .segmented-control__text {
 			font-size: 32rpx;
 		}
 	}
-
+	// #endif
+	// #ifdef APP-PLUS
+	.top{
+		top: 144rpx;
+	}
 	// #endif
 	// #ifdef  H5
 	.tab {
 		top: 88rpx;
 	}
-
 	// #endif
 	.task-container {
 		.task-container-content {
@@ -242,9 +252,22 @@
 						.info {
 							flex: 1;
 
+							.long-title {
+								font-size: 32rpx;
+								color: #333;
+								width: 420rpx;
+								white-space: nowrap;
+								overflow: hidden;
+								text-overflow: ellipsis;
+							}
+
 							.title {
 								font-size: 32rpx;
 								color: #333;
+								width: 460rpx;
+								white-space: nowrap;
+								overflow: hidden;
+								text-overflow: ellipsis;
 							}
 
 							.name-time {

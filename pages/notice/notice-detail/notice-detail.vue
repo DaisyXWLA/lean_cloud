@@ -45,7 +45,7 @@
 			},
 			getData(){
 				uni.request({
-					url: `/api/report/detail`,
+					url:this.apiServer+"/report/detail",
 					data:{
 						reportId:this.reportId
 					},
@@ -74,7 +74,7 @@
 <style lang="scss" scoped>
 	.notice-detail-container{
 		background-color:#ffffff;
-		margin-top:34rpx;
+		margin-top:10rpx;
 		.notice-detail-container-header{
 			padding:30rpx;
 			border-bottom:1px solid #f2f2f2;

@@ -1,8 +1,13 @@
 <template>
 	<view class="login">
 		<view class="login-container">
-			<view class="login-container-pic">
-				<image src="../../static/icon/login-bg.png"></image>
+			<view class="login-container-top">
+				<view class="login-container-pic">
+					<image src="../../static/icon/login-bg.png"></image>
+				</view>
+				<view class="login-remind" @click="getAddress">
+					<image src="../../static/icon/remind.png"></image>
+				</view>
 			</view>
 			<view class="login-container-content">
 				<view class="content">
@@ -34,6 +39,12 @@
 				password: ''
 			}
 		},
+		onLoad() {
+			uni.showToast({
+				icon: 'none',
+				title: uni.getStorageSync('address')
+			})
+		},
 		methods: {
 			inputUsername(e) {
 				this.username = e.detail.value
@@ -57,7 +68,7 @@
 					return;
 				}
 				uni.request({
-					url: `/api/login/userLogin`,
+					url: "/api/login/userLogin",
 					data: {
 						account: this.username,
 						password: this.password
@@ -92,12 +103,17 @@
 							return;
 						}
 					},
-					fail: () => {
+					fail: (err) => {
 						uni.showToast({
 							icon: 'none',
-							title: '网络异常,请稍后重试'
+							title: err
 						});
 					},
+				})
+			},
+			getAddress(){
+				uni.redirectTo({
+					url:"../address/address"
 				})
 			}
 		}
@@ -110,13 +126,25 @@
 		height: 100vh;
 
 		.login-container {
-			.login-container-pic {
-				image {
-					width: 100%;
-					height: 356rpx;
+			.login-container-top {
+				position: relative;
+				.login-container-pic {
+					image {
+						width: 100%;
+						height: 356rpx;
+					}
+				}
+				.login-remind{
+					position: absolute;
+					top: 60rpx;
+					right: 40rpx;
+					image{
+						width: 40rpx;
+						height: 40rpx;
+						opacity: 0.8;
+					}
 				}
 			}
-
 			.login-container-content {
 				margin-top: 200rpx;
 				display: flex;
@@ -136,7 +164,6 @@
 							height: 40rpx;
 							margin-right: 10rpx;
 						}
-
 						input {
 							font-size: 28rpx;
 							width: 460rpx;

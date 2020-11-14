@@ -68,7 +68,7 @@
 			getData() {
 				console.log(this.dutyId)
 				uni.request({
-					url: `/api/user/getPidByPostId`,
+					url: "/api/user/getPidByPostId",
 					data: {
 						postId: this.dutyId
 					},

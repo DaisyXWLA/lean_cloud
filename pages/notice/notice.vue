@@ -58,7 +58,7 @@
 			getData(){
 				// console.log(this.isRead)
 				uni.request({
-					url: `/api/report/list`,
+					url: "/api/report/list",
 					data:{
 						isRead:this.isRead
 					},

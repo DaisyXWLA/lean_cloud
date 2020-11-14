@@ -9,7 +9,6 @@
 		<view class="department-search">
 			<uniSearchBar placeholder="请输入部门名称" radius="20" bgColor="#fff" @confirm="search"></uniSearchBar>
 		</view>
-		
 		<view class="department-list">
 			<uniList>
 				<uniListItem title="技术部" showArrow clickable @click="selectMember"></uniListItem>

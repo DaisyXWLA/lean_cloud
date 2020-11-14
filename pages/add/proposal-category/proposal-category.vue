@@ -44,7 +44,7 @@
 		methods: {
 			getData(){
 				uni.request({
-					url: `/api/proposalType/list`,
+					url: "/api/proposalType/list",
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token

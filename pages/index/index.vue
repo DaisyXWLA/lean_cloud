@@ -69,7 +69,7 @@
 					 badgePositon="left" avatar="../../static/icon/notice@2x.png" :time="timeNotice" clickable @click="noticeList"></uniListChat>
 				</uniList>
 				<uniList>
-					<uniListChat title="任务提醒" :note="isReadTask==0?'您有未读任务提醒':'暂无未读任务提醒'" :badgeText="isReadTask==0?'dot':''"
+					<uniListChat title="任务提醒" :note="isReadTask==0?'您有未读任务提醒':'暂无待处理任务提醒'" :badgeText="isReadTask==0?'dot':''"
 					 badgePositon="left" avatar="../../static/icon/task@2x.png" :time="timeTask" clickable @click="taskList"></uniListChat>
 				</uniList>
 			</view>
@@ -85,10 +85,15 @@
 						</uni-grid-item> -->
 						<uni-grid-item :index="0">
 							<image src="../../static/icon/email@2x.png" mode="aspectFit" class="pic"></image>
-							<uniBadge class="uni-badge-left-margin" :text="proposalBadge==0?' ':''" type="error" size="small" />
+							<uniBadge class="uni-badge-left-margin" :text="proposalBadge>0?' ':''" type="error" size="small" />
 							<text class="text">合理化建议</text>
 						</uni-grid-item>
 						<uni-grid-item :index="1" class="border">
+							<image src="../../static/icon/bad-points@2x.png" mode="aspectFit" class="pic"></image>
+							<uniBadge class="uni-badge-left-margin" :text="proposalBadge>0?' ':''" type="error" size="small" />
+							<text class="text">不良点</text>
+						</uni-grid-item>
+						<!-- <uni-grid-item :index="1" class="border">
 							<image src="../../static/icon/manage@2x.png" mode="aspectFit" class="pic"></image>
 							<text class="text">5S管理</text>
 						</uni-grid-item>
@@ -115,7 +120,7 @@
 						<uni-grid-item :index="7" class="border">
 							<image src="../../static/icon/stimulate@2x.png" mode="aspectFit" class="pic"></image>
 							<text class="text">云激励</text>
-						</uni-grid-item>
+						</uni-grid-item> -->
 						<uni-grid-item :index="8">
 							<image src="../../static/icon/store@2x.png" mode="aspectFit" class="pic"></image>
 							<text class="text">积分商城</text>
@@ -188,6 +193,10 @@
 					uni.switchTab({
 						url: "../proposal/proposal"
 					})
+				}else if(obj.detail.index==1){
+					uni.redirectTo({
+						url:"../badPoints/bad-points/bad-points"
+					})
 				}
 			},
 			// gotoIntergral(){
@@ -203,7 +212,7 @@
 			getData() {
 				// 系统消息
 				uni.request({
-					url: `/api/news/index`,
+					url: "/api/news/index",
 					method: 'get', //请求方式
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
@@ -217,6 +226,7 @@
 						}
 						this.timeMessage = this.getTime(res.data.obj.time)
 						// console.log(this.timeMessage)
+						console.log(`未读消息${this.isReadMessage}`)
 					},
 					fail: (error) => {
 						console.log(error)
@@ -224,55 +234,60 @@
 				})
 				//获取未读公告
 				uni.request({
-					url: `/api/report/index`,
+					url: "/api/report/index",
 					method: 'get', //请求方式
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token
 					},
 					success: (res) => {
-						// console.log(res)
+						console.log(res)
 						this.isReadNotice = res.data.obj.isRead
+						if (res.data.obj.time === null) {
+							return
+						}
 						this.timeNotice = this.getTime(res.data.obj.time)
+						console.log(`未读公告${this.isReadNotice}`)
 					},
 					fail: (error) => {
 						console.log(error)
-						console.log('---------------------------')
 					}
 				})
 				// 获取未读任务
 				uni.request({
-					url: `/api/task/index`,
+					url: "/api/task/index",
 					method: 'get', //请求方式
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token
 					},
 					success: (res) => {
-						// console.log(res)
+						console.log(res)
 						this.isReadTask = res.data.obj.isRead
+						if (res.data.obj.time === null) {
+							return
+						}
 						this.timeTask = this.getTime(res.data.obj.time)
+						console.log(`待处理任务${this.isReadTask}`)
 					},
 					fail: (error) => {
 						console.log(error)
-						console.log('---------------------------')
 					}
 				})
 				//获取九宫格未处理数据
 				uni.request({
-					url: `/api/index/getIndexMenu`,
-					method: 'get', //请求方式
+					url: "/api/index/getIndexMenu",
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token
 					},
 					success: (res) => {
-						// console.log(res)
-						for (let i = 0; i < res.data.obj.length; i++) {
-							if (res.data.obj[i].id == 1) {
-								this.proposalBadge = res.data.obj[i].tasks
-							}
-						}
+						console.log(res)
+						// for (let i = 0; i < res.data.obj.length; i++) {
+						// 	if (res.data.obj[i].id == 1) {
+						// 		this.proposalBadge = res.data.obj[i].tasks
+						// 	}
+						// }
 					},
 					fail: (error) => {
 						console.log(error)
@@ -311,7 +326,7 @@
 			},
 			taskList() {
 				uni.redirectTo({
-					url: `../task-manage/task-manage?isRead=${this.isReadTask}`
+					url: `../task-manage/task-manage?isRead=${this.isReadTask}&moduleId=1`
 				})
 			}
 		}
@@ -406,7 +421,7 @@
 
 		.contianer-workspace {
 			background-color: #FFFFFF;
-			margin-top: 20rpx;
+			margin-top: 10rpx;
 
 			.title {
 				padding: 20rpx 30rpx;

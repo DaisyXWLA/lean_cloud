@@ -24,7 +24,7 @@
 			<uniList>
 				<uniListItem title="员工姓名">
 					<template slot="footer">
-						<input placeholder="请输入员工姓名" :value="userName" @blur="changeUserName" />
+						<input placeholder="请输入员工姓名" :value="userName" disabled @blur="changeUserName" />
 					</template>
 				</uniListItem>
 				<uniListItem title="手机号">
@@ -34,20 +34,20 @@
 				</uniListItem>
 				<uniListItem title="员工工号">
 					<template slot="footer">
-						<input placeholder="请输入员工工号" :value="jobNumber" @blur="changeJobNumber" />
+						<input placeholder="请输入员工工号" :value="jobNumber" disabled @blur="changeJobNumber" />
 					</template>
 				</uniListItem>
 				<uniListItem title="登录账号">
 					<template slot="footer">
-						<input placeholder="请输入登录账号" :value="account" @blur="changeAccount" />
+						<input placeholder="请输入登录账号" :value="account" disabled @blur="changeAccount" />
 					</template>
 				</uniListItem>
-				<uniListItem title="所属部门" :rightText="departmentName==null?'请选择所属部门':departmentName" clickable @click="selectDepartment">
+				<uniListItem title="所属部门" :rightText="departmentName==null?'请选择所属部门':departmentName"  @click="selectDepartment">
 				</uniListItem>
-				<uniListItem title="职务" :rightText="dutyName==null?'请选择职务':dutyName" clickable @click="selectDuty">
+				<uniListItem title="职务" :rightText="dutyName==null?'请选择职务':dutyName"  @click="selectDuty">
 				</uniListItem>
-				<uniListItem title="上级用户" :rightText="leaderName==null?'请选择上级用户':leaderName" clickable @click="selectLeader">
-				</uniListItem>
+				<!-- <uniListItem title="上级用户" :rightText="leaderName==null?'请选择上级用户':leaderName" clickable @click="selectLeader">
+				</uniListItem> -->
 			</uniList>
 		</view>
 		<!-- <uniPopup ref="popup" type="message">
@@ -114,7 +114,7 @@
 			update() {
 				// this.$refs.popup.open()
 				uni.request({
-					url: `/api/user/saveOrUpdateUser`,
+					url: "/api/user/saveOrUpdateUser",
 					data: {
 						account: this.account,
 						realname: this.userName,
@@ -122,7 +122,7 @@
 						deptId: this.departmentId,
 						postId: this.dutyId,
 						job: this.jobNumber,
-						pid: this.leaderId,
+						// pid: this.leaderId,
 						userId: this.userId
 					},
 					header: {
@@ -175,7 +175,7 @@
 			//选择部门
 			selectDepartment() {
 				uni.navigateTo({
-					url: '../checkDept/department/department?moduleId=1'
+					url: '../department/department?moduleId=1'
 				})
 			},
 			//选择职务

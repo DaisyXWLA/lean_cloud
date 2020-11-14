@@ -15,240 +15,411 @@
 			"path": "pages/personal/personal",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+
 			}
 
 		}, {
 			"path": "pages/integral/integral",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/message/message",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/notice/notice",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/task/task",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 		}, {
 			"path": "pages/notice/notice-detail/notice-detail",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/my-proposal/my-proposal",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/rank/rank",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/idea/idea",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/add/add",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/proposal/proposal",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/checkDept/checkDept",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/refuse/refuse",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/finish/finish",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/accept/accept",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
-			"path": "pages/checkDept/department/department",
+			"path": "pages/department/department",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/checkMember/checkMember",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/task-manage/task-manage",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/proposal-detail/proposal-detail",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/staff-manage/staff-manage",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
 			}
 
 		}, {
 			"path": "pages/staff-add/staff-add",
 			"style": {
 				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/member/member",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/member-list/member-list",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/password/password",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/add/proposal-category/proposal-category",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/add/area/area",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/duty/duty",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/leader/leader",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/comment/comment",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/check-member-list/check-member-list",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/transfer/transfer",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/modify/modify",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/backout/backout",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/confirm/confirm",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/initCheck/initCheck",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/badPoints/bad-points/bad-points",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/badPoints/add-bad-points/add-bad-points",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/badPoints/bad-points-detail/bad-points-detail",
+			"style": {
+				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/badPoints/my-bad-points/my-bad-points",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
+		}, {
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"background": "#f2f2f2"
+				}
+			}
+
 		}
-	    ,{
-            "path" : "pages/member/member",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/member-list/member-list",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/password/password",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/feedback/feedback",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/add/proposal-category/proposal-category",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/add/area/area",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/search/search",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/duty/duty",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/leader/leader",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/comment/comment",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationStyle": "custom"
 	},
@@ -287,7 +458,7 @@
 			}
 		]
 	},
-	"easycom":{
-		"uni-(.*)":"@/components/uni-$1/uni-$1.vue"
+	"easycom": {
+		"uni-(.*)": "@/components/uni-$1/uni-$1.vue"
 	}
 }

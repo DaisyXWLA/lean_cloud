@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 导航 -->
-		<uniNavBar :status-bar="true" background-color="#4378BE" right-text="确定" color="#ffffff" title="合理化建议" fixed
+		<uniNavBar :status-bar="true" background-color="#4378BE" right-text="确定" color="#ffffff" title="新增合理化建议" fixed
 		 @clickRight="addConfirm">
 			<template slot="left">
 				<uniIcon type="arrowleft" size="28" color="#ffffff" @click="back"></uniIcon>
@@ -10,7 +10,7 @@
 		<view class="add-container">
 			<view class="title">
 				<text>提案标题</text>
-				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入标题信息" :value="title" :maxlength="50"
+				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入标题" :value="title" :maxlength="50"
 				 :auto-height="true" @blur="getTitle" />
 				</view>
 			<view class="category">
@@ -22,19 +22,19 @@
 				</uniList>
 			</view>
 			<view class="section">
-				<text>现状</text>
-				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入现状信息" :value="actuality" :auto-height="true" @blur="getActuality"/>
+				<text>提案描述</text>
+				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入现状描述" :value="actuality" :auto-height="true" @blur="getActuality"/>
 			</view>
 			<view class="section">
-				<text>建议</text>
-				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入建议信息" :value="proposal" :auto-height="true" @blur="getProposal"/>
+				<text>期望建议</text>
+				<textarea placeholder-style="color:#BCC1D4;font-size:28rpx" placeholder="请输入期望建议" :value="proposal" :auto-height="true" @blur="getProposal"/>
 			</view>
 			<view class="accessory">
 				<text>上传照片</text>
 				<!-- <view class="upload-btn">
 					<image src="../../static/icon/plus-gray@2x.png" mode="scaleToFit" @click="upload"></image>
 				</view> -->
-				<upload v-model="imageData" @delete="deleteImage" @add="addImage" ></upload>
+				<upload v-model="imageData" :server-url="uploadUrl" :server-url-delete-image="deleteUrl" :form-data="formData" @delete="deleteImage" @add="addImage" ></upload>
 			</view>
 		</view>
 	</view>
@@ -63,7 +63,10 @@
 				 areaName:'',
 				 areaId:'',
 				 actuality:'',
-				 proposal:''
+				 proposal:'',
+				 uploadUrl:'',
+				 deleteUrl:'',
+				 formData:{}
 			}
 		},
 		onLoad(option) {
@@ -75,6 +78,10 @@
 			this.areaId=uni.getStorageSync('areaInfo').areaId
 			this.categoryName=uni.getStorageSync('categoryInfo').categoryName
 			this.categoryId=uni.getStorageSync('categoryInfo').categoryId
+			uni.showToast({
+				icon: 'success',
+				title: `${this.categoryName},${this.areaName}`
+			});	
 		},
 		methods: {
 			back(){
@@ -84,13 +91,14 @@
 			},
 			addConfirm(){
 				uni.request({
-					url: `/api/proposal/addProposal`,
+					url: "/api/proposal/addProposal",
 					data:{
 						title:this.title,
 						type:this.categoryId,
 						area:this.areaId,
 						state:this.actuality,
-						proposal:this.proposal
+						proposal:this.proposal,
+						// pictures:
 					},
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
@@ -112,6 +120,9 @@
 							this.areaName=''
 							this.actuality=''
 							this.proposal=''
+							uni.switchTab({
+								url:"../idea/idea"
+							})
 						}
 					},
 					fail: (error) => {
@@ -122,6 +133,12 @@
 			deleteImage () {},
 			addImage (e) {
 				console.log(e)
+				// uni.request({
+				// 	url:`/api/file/fileInput`,
+				// 	data:{
+				// 		pictures:
+				// 	},
+				// })
 			},
 			selectCategory(){
 				uni.redirectTo({

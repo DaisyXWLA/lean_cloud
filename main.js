@@ -2,8 +2,7 @@ import Vue from 'vue'
 import App from './App'
 
 Vue.config.productionTip = false
-Vue.prototype.apiServer = 'http://192.168.3.102:8001'
-
+Vue.prototype.apiServer = uni.getStorageSync('address')
 App.mpType = 'app'
 
 const app = new Vue({

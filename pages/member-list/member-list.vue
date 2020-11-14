@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<!-- 导航 -->
-		<uniNavBar :status-bar="true" background-color="#4378BE" :right-text="moduleId==0?'新增':''" color="#ffffff" :title="departmentName" fixed @clickRight="addMember">
+		<uniNavBar :status-bar="true" background-color="#4378BE" :right-text="moduleId==0?'新增':''" color="#ffffff" :title="departmentName"
+		 fixed @clickRight="addMember">
 			<template slot="left">
 				<uniIcon type="arrowleft" size="28" color="#ffffff" @click="back"></uniIcon>
 			</template>
@@ -13,17 +14,11 @@
 			<uniList v-if="moduleId==0" v-for="item in memberList" :key="item.id">
 				<uniListItem :title="item.realname"></uniListItem>
 			</uniList>
-			<uniList  v-else v-for="item in memberList" :key="item.id">
+			<uniList v-else v-for="item in memberList" :key="item.id">
 				<uniListItem :title="item.realname" clickable @click="selectMember"></uniListItem>
 			</uniList>
 		</view>
-		<!-- <uni-swipe-action>
-			<uni-swipe-action-item :right-options="operateOption" :show="isOpened" :auto-close="false" @click="deleteMember">
-				<view class="content-box">
-					<text class="content-text">使用变量控制SwipeAction的开启状态</text>
-				</view>
-			</uni-swipe-action-item>
-		</uni-swipe-action> -->
+		<!-- <markSlideList :list="memberList" :button="buttonList" :border="true" @click="clickMethod" @change="changeMethod"></markSlideList> -->
 	</view>
 </template>
 
@@ -33,8 +28,7 @@
 	import uniSearchBar from '../../components/uni-search-bar/uni-search-bar.vue'
 	import uniList from "../../components/uni-list/uni-list.vue"
 	import uniListItem from '../../components/uni-list-item/uni-list-item.vue'
-	import uniSwipeAction from '../../components/uni-swipe-action/uni-swipe-action'
-	import uniSwipeActionItem from '../../components/uni-swipe-action-item/uni-swipe-action-item'
+	import markSlideList from '../../components/mark-slide-list/mark-slide-list.vue'
 	export default {
 		components: {
 			uniNavBar,
@@ -42,69 +36,74 @@
 			uniSearchBar,
 			uniList,
 			uniListItem,
-			uniSwipeAction,
-			uniSwipeActionItem
+			markSlideList
 		},
 		data() {
 			return {
 				moduleId: '',
-				departmentId:'',
-				departmentName:'',
-				memberList:[],
-				deptId:'',
-				operateOption:[
-					{
-						text:'取消',
-						style:{
-							backgroundColor:'#FDB205',
-							color:'#fff'
-						}
+				departmentId: '',
+				departmentName: '',
+				memberList: [],
+				depId: '',
+				proposalId: '',
+				dpId: '',
+				buttonList: [{
+						title: '取消',
+						background: '#c4c7cd'
 					},
 					{
-						text:'删除',
-						style:{
-							backgroundColor:'#FE6E69',
-							color:'#fff'
-						}
+						title: '删除',
+						background: '#ff3b32'
 					}
-				],
-				isOpened:'none'
+				]
 			}
 		},
 		onLoad(option) {
 			this.token = uni.getStorageSync('token')
 			this.moduleId = option.moduleId
-			this.departmentId=option.departmentId
-			this.departmentName=option.departmentName
-			this.deptId=option.deptId
+			this.departmentId = option.departmentId
+			this.departmentName = option.departmentName
+			this.deptId = option.deptId
+			this.proposalId = option.proposalId
+			this.dpId = option.dpId
 			this.getData()
 		},
 		methods: {
 			getData() {
-				if(this.departmentId==undefined){
-					this.departmentId=this.deptId
+				if (this.departmentId == undefined) {
+					this.departmentId = this.deptId
+				} 
+				if(this.departmentId == undefined&&this.deptId==undefined){
+					this.departmentId=this.dpId
 				}
 				uni.request({
-					url: `/api/user/getListByDept`,
-					data:{
-						deptId:this.departmentId
+					url: "/api/user/getListByDept",
+					data: {
+						deptId: this.departmentId
 					},
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token
 					},
 					success: (res) => {
-						// console.log(res)
-						this.memberList=res.data.obj
+						console.log(res)
+						this.memberList = res.data.obj
+						// this.memberList = res.data.obj.map((item, index) => {
+						// 	return Object.assign({}, {
+						// 		id: item.id,
+						// 		title: item.realname,
+						// 		slide_x: 0
+						// 	})
+						// })
 					},
 					fail: (error) => {
 						console.log(error)
 					}
 				})
 			},
-			addMember(){
+			addMember() {
 				uni.redirectTo({
-					url:`../staff-add/staff-add?deptId=${this.departmentId}&deptName=${this.departmentName}`
+					url: `../staff-add/staff-add?deptId=${this.departmentId}&deptName=${this.departmentName}`
 				})
 			},
 			back() {
@@ -114,7 +113,11 @@
 					})
 				} else if (this.moduleId == 1) {
 					uni.redirectTo({
-						url: "../member"
+						url: "../member/member"
+					})
+				} else if (this.moduleId == 2) {
+					uni.redirectTo({
+						url: `../checkMember/checkMember?proposalId=${this.proposalId}`
 					})
 				}
 
@@ -127,8 +130,12 @@
 					url: "../checkMember?memberName=Julie"
 				})
 			},
-			deleteMember(){
-				
+			changeMethod(data, button, index) {
+				console.log('滑动按钮回调', data)
+				console.log('滑动按钮回调', button)
+			},
+			clickMethod(data) {
+				console.log('点击行回调', data)
 			}
 		}
 	}
@@ -152,12 +159,11 @@
 	}
 
 	.member-list {
-		margin-top: 20rpx;
-
 		/deep/ .uni-list--border-top {
 			height: 0;
 		}
-		/deep/ .uni-list--border-bottom{
+
+		/deep/ .uni-list--border-bottom {
 			background: #f2f2f2;
 		}
 	}

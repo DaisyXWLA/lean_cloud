@@ -50,6 +50,7 @@
 		onLoad(option) {
 			this.token = uni.getStorageSync('token')
 			this.isRead = option.isRead
+			this.moduleId = option.moduleId
 			this.getData()
 		},
 		methods: {
@@ -61,16 +62,15 @@
 			detail(id, worksType) {
 				if (worksType == 1) {
 					uni.redirectTo({
-						url: `../my-proposal/my-proposal?id=${id}`
+						url: `../my-proposal/my-proposal?id=${id}&moduleFlagId=1`
 					})
 				}
-
 			},
 			//获取列表数据
 			getData() {
 				// console.log(this.isRead)
 				uni.request({
-					url: `/api/task/list`,
+					url: "/api/task/list",
 					data: {
 						isRead: this.isRead
 					},
@@ -89,7 +89,8 @@
 			},
 			timeFormat(time) {
 				let date = new Date(time)
-				let newTime = `${date.getFullYear()}-${this.addZero(date.getMonth()+1)}-${this.addZero(date.getDate())}  ${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}`
+				let newTime =
+					`${date.getFullYear()}-${this.addZero(date.getMonth()+1)}-${this.addZero(date.getDate())}  ${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}`
 				return newTime
 			},
 			addZero(time) {
@@ -100,12 +101,13 @@
 </script>
 
 <style lang="scss" scoped>
-	.task-list-empty{
+	.task-list-empty {
 		font-size: 40rpx;
 		color: #C0C4CC;
 		text-align: center;
 		margin-top: 500rpx;
 	}
+
 	.task-list {
 		margin-top: 34rpx;
 		padding: 0 30rpx;

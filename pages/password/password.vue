@@ -67,7 +67,7 @@
 			},
 			updatePassword(){
 				uni.request({
-					url: `/api/user/changePwd`,
+					url: "/api/user/changePwd",
 					data:{
 						oldPwd:this.oldPassword,
 						newPwd:this.newPassword,

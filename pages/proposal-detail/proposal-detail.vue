@@ -16,7 +16,11 @@
 							<image src="../../static/portrait.png" mode="aspectFit"></image>
 							<text>{{data.realName}}</text>
 						</view>
-						<view class="status-stand" v-if="checkStatus=='待审核'">待审核</view>
+						<view class="status" v-if="data.auditStatus==0">审核未通过</view>
+						<view class="status" v-else-if="data.auditStatus==1">审核中</view>
+						<view class="status" v-else-if="data.auditStatus==2">落实中</view>
+						<view class="status" v-else-if="data.auditStatus==3">已完成</view>
+						<!-- <view class="status-stand" v-if="checkStatus=='待审核'">待审核</view>
 						<view class="status-stand" v-if="checkStatus=='协助部门待审核'">协助部门待审核</view>
 						<view class="status-complete" v-if="checkStatus=='协助部门审核通过'">协助部门审核通过</view>
 						<view class="status-complete" v-else-if="checkStatus=='审核通过'">审核通过</view>
@@ -24,7 +28,7 @@
 						<view class="status-complete" v-else-if="checkStatus=='已落实'">已落实</view>
 						<view class="status-stand" v-else-if="checkStatus=='待验收'">待验收</view>
 						<view class="status-complete" v-else-if="checkStatus=='完成验收'">完成验收</view>
-						<view class="status-refuse" v-else-if="checkStatus=='拒绝'">拒绝</view>
+						<view class="status-refuse" v-else-if="checkStatus=='拒绝'">拒绝</view> -->
 					</view>
 				</view>
 				<view class="proposal-container-detail-content-box">
@@ -66,9 +70,6 @@
 							<view :class="item.name.indexOf('待')!=-1?'title-stand':'title-complete'">
 								{{item.name}}
 							</view>
-							<view class="content">
-								{{item.content}}
-							</view>
 							<view class="user-info">
 								<view class="portrait">
 									<image src="../../static/portrait-b.png" mode=""></image>
@@ -79,16 +80,51 @@
 									<text v-else>{{item.acceptTime}}</text>
 								</view>
 							</view>
+							<view class="content" v-if="item.content == null">
+								<view>
+									<text>{{contentFormat(item.content)}}</text>
+								</view>
+							</view>
+							<view class="content" v-else-if="item.content.indexOf('<br/>') == -1">
+								<view>
+									<text class="steps-content">描述：{{contentFormat(item.content)}}</text>
+								</view>
+							</view>
+							<view class="content" v-else>
+								<view>
+									<text class="steps-content" v-if="contentFormat(item.content).expense==''"></text>
+									<text class="steps-content" v-else>预计投入：{{contentFormat(item.content).expense}} 元</text>
+								</view>
+								<view>
+									<text class="steps-content" v-if="contentFormat(item.content).integral==''"></text>
+									<text class="steps-content" v-else>奖励积分：{{contentFormat(item.content).integral}} 分</text>
+								</view>
+								<view>
+									<text class="steps-content" v-if="contentFormat(item.content).finishTime==''"></text>
+									<text class="steps-content" v-else>期望时间：{{contentFormat(item.content).finishTime}}</text>
+								</view>
+								<view>
+									<text class="steps-content">描述：{{contentFormat(item.content).content}}</text>
+								</view>
+							</view>
+
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="proposal-container-detail-comment" id="commentList">
+			<view class="proposal-container-detail-comment-empty" v-if="commentList.length==0">
+				<view class="proposal-container-detail-comment-empty-title">
+					<text>评价列表</text>
+				</view>
+				<view class="proposal-container-detail-comment-empty-content">
+					暂无数据
+				</view>
+			</view>
+			<view class="proposal-container-detail-comment" id="commentList" v-else>
 				<view class="proposal-container-detail-comment-title">
 					<text>评价列表</text>
 				</view>
-				<view class="proposal-container-detail-comment-list-empty" v-if="commentList.length==0">暂无数据</view>
-				<view class="proposal-container-detail-comment-list" v-else v-for="item in commentList" :key="item.id">
+				<view class="proposal-container-detail-comment-list" v-for="item in commentList" :key="item.id">
 					<view class="proposal-container-detail-comment-list-content">
 						<view class="header">
 							<view class="portrait">
@@ -145,12 +181,15 @@
 				processList: [],
 				checkStatus: '',
 				processTime: '',
-				commentList: []
+				commentList: [],
+				moduleId: '',
+				contentObj: {}
 			}
 		},
 		onLoad(option) {
 			this.token = uni.getStorageSync('token')
 			this.proposalId = option.proposalId
+			this.moduleId = option.moduleId
 			this.getData()
 			if (option.flag == 1) {
 				setTimeout(function() {
@@ -168,7 +207,7 @@
 			getData() {
 				//获取建议详情内容
 				uni.request({
-					url: `/api/proposal/getProposal`,
+					url: "/api/proposal/getProposal",
 					data: {
 						proposalId: this.proposalId
 					},
@@ -177,7 +216,7 @@
 						"token": this.token
 					},
 					success: (res) => {
-						// console.log(res)
+						console.log(res)
 						this.data = res.data.obj
 					},
 					fail: (error) => {
@@ -196,7 +235,7 @@
 						"token": this.token
 					},
 					success: (res) => {
-						// console.log(res)
+						console.log(res.data.obj)
 						this.processList = res.data.obj
 						this.checkStatus = this.processList[this.processList.length - 1].name
 						this.processTime = this.processList[this.processList.length - 2].acceptTime
@@ -217,7 +256,7 @@
 						"token": this.token
 					},
 					success: (res) => {
-						console.log(res)
+						// console.log(res)
 						this.commentList = res.data.obj.records
 
 					},
@@ -227,16 +266,23 @@
 				})
 			},
 			back() {
-				uni.switchTab({
-					url: "../proposal/proposal"
-				})
+				console.log('建议详情返回')
+				if (this.moduleId == 4) {
+					uni.switchTab({
+						url: `../proposal/proposal?moduleId=${this.moduleId}`
+					})
+				} else if (this.moduleId == 5) {
+					uni.switchTab({
+						url: `../idea/idea?moduleId=${this.moduleId}`
+					})
+				}
 			},
 			changeLike() {
 				this.likeSelected = !this.likeSelected
 			},
 			viewComments() {
 				uni.redirectTo({
-					url: `../comment/comment?proposalId=${this.proposalId}`
+					url: `../comment/comment?proposalId=${this.proposalId}&moduleId=${this.moduleId}`
 				})
 			},
 			timeFormat(time) {
@@ -271,6 +317,44 @@
 					return `${hours}小时${minutes}分钟${seconds}秒`
 				} else {
 					return `${days}天${hours}小时${minutes}分钟${seconds}秒`
+				}
+			},
+			contentFormat(str) {
+				if (str == null) {
+					return ''
+				} else if (str.indexOf('<br/>') == -1) {
+					return str
+				} else {
+					// return str.
+					// console.log(str.match(new RegExp('<br/>', "g")))
+					let indexArr = []
+					for (let i = 0; i < str.length; i++) {
+						if (str[i] == "<") {
+							indexArr.push(i)
+						}
+					}
+					if (indexArr.length == 0) {
+						this.contentObj.content = str.slice(0, indexArr[0])
+						this.contentObj.finishTime = ''
+						this.contentObj.integral = ''
+						this.contentObj.expense = ''
+					} else if (indexArr.length == 1) {
+						this.contentObj.content = str.slice(0, indexArr[0])
+						this.contentObj.finishTime = str.slice(indexArr[0] + 12, indexArr[1])
+						this.contentObj.integral = ''
+						this.contentObj.expense = ''
+					} else if (indexArr.length == 2) {
+						this.contentObj.content = str.slice(0, indexArr[0])
+						this.contentObj.finishTime = str.slice(indexArr[0] + 12, indexArr[1])
+						this.contentObj.integral = str.slice(indexArr[2] + 12, str.length - 3)
+						this.contentObj.expense = ''
+					} else {
+						this.contentObj.content = str.slice(0, indexArr[0])
+						this.contentObj.finishTime = str.slice(indexArr[0] + 12, indexArr[1])
+						this.contentObj.integral = str.slice(indexArr[2] + 12, str.length - 3)
+						this.contentObj.expense = str.slice(indexArr[1] + 10, indexArr[2] - 2)
+					}
+					return this.contentObj
 				}
 			}
 		}
@@ -349,11 +433,12 @@
 			.proposal-container-detail-content-box {
 				.info {
 					margin-top: 20rpx;
+					padding: 0 20rpx;
 
 					text {
 						display: block;
 						font-size: 28rpx;
-						color: #333;
+						color: #666;
 						line-height: 42rpx;
 					}
 				}
@@ -393,7 +478,7 @@
 		.proposal-container-detail-progress {
 			background: #fff;
 			margin-top: 20rpx;
-
+			padding: 20rpx 0 30rpx;
 			// margin-bottom: 100rpx;
 			.proposal-container-detail-progress-title {
 				border-bottom: 1px solid #f2f2f2;
@@ -468,7 +553,11 @@
 						.content {
 							font-size: 24rpx;
 							color: #999;
+
 							// padding: 10rpx 0;
+							.steps-content {
+								color: #aaa;
+							}
 						}
 
 						.user-info {
@@ -501,6 +590,28 @@
 			}
 		}
 
+		.proposal-container-detail-comment-empty {
+			margin-top: 10rpx;
+			margin-bottom: 100rpx;
+
+			.proposal-container-detail-comment-empty-title {
+				border-bottom: 1px solid #f2f2f2;
+				background: #fff;
+				text {
+					display: inline-block;
+					padding: 20rpx 30rpx;
+					font-size: 28rpx;
+					color: #999;
+				}
+			}
+
+			.proposal-container-detail-comment-empty-content {
+				font-size: 32rpx;
+				color: #C0C4CC;
+				text-align: center;
+				margin-top: 20rpx;
+			}
+		}
 		.proposal-container-detail-comment {
 			background: #fff;
 			margin-top: 20rpx;
@@ -515,13 +626,6 @@
 					font-size: 28rpx;
 					color: #999999;
 				}
-			}
-
-			.proposal-container-detail-comment-list-empty {
-				font-size:28rpx;
-				color: #f2f2f2;
-				text-align: center;
-				margin-top: 20rpx;
 			}
 
 			.proposal-container-detail-comment-list {

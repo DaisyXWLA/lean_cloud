@@ -59,7 +59,7 @@
 			getData(){
 				// console.log(this.isRead)
 				uni.request({
-					url: `/api/news/list`,
+					url: "/api/news/list",
 					data:{
 						isRead:this.isRead
 					},
@@ -68,6 +68,7 @@
 						"token": this.token
 					},
 					success: (res) => {
+						console.log(res)
 						this.messageList=res.data.obj.records
 					},
 					fail: (error) => {

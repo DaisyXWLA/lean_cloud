@@ -44,8 +44,8 @@
 				</uniListItem>
 				<uniListItem :class="dutyName.length=='0'?'placeholder':'default'" title="职务" :rightText="dutyName.length=='0'?'请选择职务':dutyName" clickable @click="selectDuty">
 				</uniListItem>
-				<uniListItem :class="leaderName.length=='0'?'placeholder':'default'" title="上级用户" :rightText="leaderName.length=='0'?'请选择上级用户':leaderName" clickable @click="selectLeader">
-				</uniListItem>
+			<!-- 	<uniListItem :class="leaderName.length=='0'?'placeholder':'default'" title="上级用户" :rightText="leaderName.length=='0'?'请选择上级用户':leaderName" clickable @click="selectLeader">
+				</uniListItem> -->
 			</uniList>
 		</view>
 	</view>
@@ -95,7 +95,7 @@
 			addConfirm() {
 				console.log('添加用户')
 				uni.request({
-					url: `/api/user/saveOrUpdateUser`,
+					url: "/api/user/saveOrUpdateUser",
 					data: {
 						account: this.account,
 						job: this.jobNumber,
@@ -105,7 +105,7 @@
 						email: this.mail,
 						deptId: this.departmentId,
 						postId: this.dutyId,
-						pid: this.leaderId
+						// pid: this.leaderId
 					},
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
@@ -145,7 +145,7 @@
 			//选择部门
 			selectDepartment() {
 				uni.navigateTo({
-					url: '../checkDept/department/department?moduleId=1'
+					url: '../department/department?moduleId=1'
 				})
 			},
 			//选择职务

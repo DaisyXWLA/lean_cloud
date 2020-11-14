@@ -21,7 +21,7 @@
 				<text>明细</text>
 			</view>
 			<uniList v-for="item in integralList" :key="item.id">
-				<uni-list-item title="采纳建议" :note="timeFormat(item.create_time)" :rightText="item.point_change" />
+				<uni-list-item title="采纳建议" :note="timeFormat(item.createTime)" :rightText="item.pointChange.toString()" />
 			</uniList>
 		</view>
 	</view>
@@ -69,7 +69,7 @@
 			//获取数据
 			getData() {
 				uni.request({
-					url: `/api/pointDetail/list`,
+					url: "/api/pointDetail/list",
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token
@@ -98,7 +98,15 @@
 	/deep/ .uni-navbar--border {
 		border: none;
 	}
-
+	/deep/ .uni-list--border-bottom{
+		height: 0;
+	}
+	/deep/ .uni-list--border-top{
+		background:#f2f2f2
+	}
+	/deep/ .uni-list-item__container{
+		padding: 14rpx 30rpx;
+	}
 	.integral-container {
 		.integral-container-header {
 			padding: 60rpx 0;
@@ -131,7 +139,7 @@
 
 	.integral-content {
 		background: #fff;
-		margin-top: 20rpx;
+		margin-top: 10rpx;
 
 		.integral-content-title {
 			padding: 30rpx;
@@ -139,19 +147,19 @@
 			justify-content: space-between;
 
 			text {
-				font-size: 32rpx;
+				font-size: 28rpx;
 				color: #999;
 			}
 
 		}
 
 		/deep/ .uni-list-item__content-title {
-			font-size: 32rpx;
+			font-size: 28rpx;
 			color: #333;
 		}
 
 		/deep/ .uni-list-item__extra-text {
-			font-size: 36rpx;
+			font-size: 32rpx;
 			color: #4378BE;
 		}
 	}

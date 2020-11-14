@@ -43,7 +43,7 @@
 		methods: {
 			getData() {
 				uni.request({
-					url: `/api/dept/list`,
+					url: "/api/dept/list",
 					header: {
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token

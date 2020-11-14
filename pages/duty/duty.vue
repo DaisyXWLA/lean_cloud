@@ -67,12 +67,13 @@
 			//获取职务列表数据
 			getData(){
 				uni.request({
-					url:`/api/post/list`,
+					url:"/api/post/list",
 					header:{
 						"Content-Type": "application/x-www-form-urlencoded;application/json;charset=UTF-8",
 						"token": this.token
 					},
 					success: (res) => {
+						console.log(res)
 						this.dutyList=res.data.obj
 					},
 					fail: (error) => {

@@ -22,17 +22,19 @@
 		data() {
 			return {
 				proposalId:'',
-				commentContent:''
+				commentContent:'',
+				moduleId:''
 			}
 		},
 		onLoad(option) {
 			this.token = uni.getStorageSync('token')
+			this.moduleId=option.moduleId
 			this.proposalId = option.proposalId
 		},
 		methods: {
 			addComment(){
 				uni.request({
-					url: `/api/message/addMessage`,
+					url: "/api/message/addMessage",
 					data:{
 						content:this.commentContent,
 						worksId:this.proposalId,
@@ -48,6 +50,8 @@
 								icon: 'success',
 								title: '评论提交成功！'
 							});
+							this.commentContent=''
+							this.back()
 						}
 					},
 					fail: (error) => {
@@ -59,8 +63,9 @@
 				this.commentContent=e.detail.value
 			},
 			back(){
+				console.log('返回列表')
 				uni.redirectTo({
-					url:`../proposal-detail/proposal-detail?proposalId=${this.proposalId}`
+					url:`../proposal-detail/proposal-detail?proposalId=${this.proposalId}&moduleId=${this.moduleId}`
 				})
 			}
 		}
